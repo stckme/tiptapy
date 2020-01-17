@@ -8,25 +8,24 @@ renderers = {}
 
 
 class BaseNode:
-    type = 'prose-mirror_content-type'
+    type = "prose-mirror_content-type"
     wrap_tag = None
 
     def render(self, in_data):
         out = self.inner_render(in_data)
         if self.wrap_tag:
-            return f'<{self.wrap_tag}>{out}</{self.wrap_tag}>'
+            return f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
         return out
 
     def inner_render(self, node):
-        return node['content']
+        return node["content"]
 
 
 class BaseContainer(BaseNode):
-
     def inner_render(self, nodes: List):
-        out = ''
-        for node in nodes['content']:
-            node_type = node.get('type')
+        out = ""
+        for node in nodes["content"]:
+            node_type = node.get("type")
             renderer = renderers.get(node_type)
             assert renderer, f'Unsupported node_type: "{node_type}"'
             if renderer:
@@ -35,53 +34,53 @@ class BaseContainer(BaseNode):
 
 
 class Text(BaseNode):
-    type = 'text'
-    mark_tags = {'bold': 'strong', 'italic': 'em', 'link': 'a'}
+    type = "text"
+    mark_tags = {"bold": "strong", "italic": "em", "link": "a"}
 
     def inner_render(self, node):
-        text = node['text']
-        marks = node.get('marks')
+        text = node["text"]
+        marks = node.get("marks")
         if marks:
             for mark in marks:
-                tag = self.mark_tags.get(mark.get('type'))
-                attrs = mark.get('attrs')
+                tag = self.mark_tags.get(mark.get("type"))
+                attrs = mark.get("attrs")
                 if attrs:
-                    attrs_s = ' '.join(f'{k}="{v}"' for k,v in attrs.items())
-                    text = f'<{tag} {attrs_s}>{text}</{tag}>'
+                    attrs_s = " ".join(f'{k}="{v}"' for k, v in attrs.items())
+                    text = f"<{tag} {attrs_s}>{text}</{tag}>"
                 else:
-                    text = f'<{tag}>{text}</{tag}>'
+                    text = f"<{tag}>{text}</{tag}>"
         return text
 
 
 class Paragraph(BaseContainer):
-    type = 'paragraph'
-    wrap_tag = 'p'
+    type = "paragraph"
+    wrap_tag = "p"
 
 
 class BlockQuote(BaseContainer):
-    type = 'blockquote'
-    wrap_tag = 'blockquote'
+    type = "blockquote"
+    wrap_tag = "blockquote"
 
 
 class HardBreak(BaseContainer):
-    type = 'hard_break'
+    type = "hard_break"
 
     def inner_render(self, node):
-        return '<br>'
+        return "<br>"
 
 
 class ListItem(BaseContainer):
-    type = 'list_item'
-    wrap_tag = 'li'
+    type = "list_item"
+    wrap_tag = "li"
 
 
 class BulletList(BaseContainer):
-    type = 'bullet_list'
-    wrap_tag = 'ul'
+    type = "bullet_list"
+    wrap_tag = "ul"
 
 
 class Doc(BaseContainer):
-    type = 'doc'
+    type = "doc"
 
 
 def register_renderer(cls):
@@ -94,7 +93,7 @@ for o in tuple(locals().values()):
 
 
 def convert_any(in_data):
-    typ = in_data.get('type')
+    typ = in_data.get("type")
     renderer = renderers.get(typ)
     return renderer.render(in_data)
 
@@ -104,8 +103,13 @@ def to_html(s):
     return convert_any(in_data)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import timeit
-    s = open('tests/data.json').read()
+
+    s = open("tests/data.json").read()
     print(to_html(s))
-    print(timeit.timeit("to_html(s)", setup="from __main__ import to_html, s", number=100000))
+    print(
+        timeit.timeit(
+            "to_html(s)", setup="from __main__ import to_html, s", number=100000
+        )
+    )
