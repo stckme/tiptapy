@@ -23,5 +23,4 @@ s = """
 
 out = tiptapy.to_html(s)
 print(out)
-# '<p><span>This is some inserted text. 👋</span></p>'
-
+# '<p>This is some inserted text. 👋</p>'
