@@ -9,6 +9,7 @@ renderers = {}
 
 class BaseNode:
     type = 'prose-mirror_content-type'
+    wrap_tag = None
 
     def render(self, in_data):
         out = self.inner_render(in_data)
@@ -21,13 +22,13 @@ class BaseNode:
 
 
 class BaseContainer(BaseNode):
-    wrap_tag = None
 
     def inner_render(self, nodes: List):
         out = ''
         for node in nodes['content']:
             node_type = node.get('type')
             renderer = renderers.get(node_type)
+            assert renderer, f'Unsupported node_type: "{node_type}"'
             if renderer:
                 out += renderer.render(node)
         return out
@@ -35,8 +36,7 @@ class BaseContainer(BaseNode):
 
 class Text(BaseNode):
     type = 'text'
-    wrap_tag = 'span'
-    mark_tags = {'bold': 'strong', 'italic': 'i'}
+    mark_tags = {'bold': 'strong', 'italic': 'em', 'link': 'a'}
 
     def inner_render(self, node):
         text = node['text']
@@ -44,13 +44,30 @@ class Text(BaseNode):
         if marks:
             for mark in marks:
                 tag = self.mark_tags.get(mark.get('type'))
-                text = f'<{tag}>{text}</{tag}>'
+                attrs = mark.get('attrs')
+                if attrs:
+                    attrs_s = ' '.join(f'{k}="{v}"' for k,v in attrs.items())
+                    text = f'<{tag} {attrs_s}>{text}</{tag}>'
+                else:
+                    text = f'<{tag}>{text}</{tag}>'
         return text
 
 
 class Paragraph(BaseContainer):
     type = 'paragraph'
     wrap_tag = 'p'
+
+
+class BlockQuote(BaseContainer):
+    type = 'blockquote'
+    wrap_tag = 'blockquote'
+
+
+class HardBreak(BaseContainer):
+    type = 'hard_break'
+
+    def inner_render(self, node):
+        return '<br>'
 
 
 class ListItem(BaseContainer):
