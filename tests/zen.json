@@ -1,0 +1,255 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "blockquote",
+      "content": [
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Now is better than never."
+            },
+            {
+              "type": "hard_break"
+            },
+            {
+              "type": "text",
+              "text": "Although never is often better than "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "italic"
+                }
+              ],
+              "text": "right"
+            },
+            {
+              "type": "text",
+              "text": " now."
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "link",
+                  "attrs": {
+                    "href": "https://en.wikipedia.org/wiki/Zen_of_Python#cite_note-4"
+                  }
+                }
+              ],
+              "text": "[1]"
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "- Zen of Python By "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Tom Peters"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "The "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "Zen of Python"
+        },
+        {
+          "type": "text",
+          "text": " is a collection of 19 \"guiding principles\" for writing "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Computer_program"
+              }
+            }
+          ],
+          "text": "computer programs"
+        },
+        {
+          "type": "text",
+          "text": " that influence the design of the "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Python_(programming_language)"
+              }
+            }
+          ],
+          "text": "Python"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Programming_language"
+              }
+            }
+          ],
+          "text": "programming language"
+        },
+        {
+          "type": "text",
+          "text": ". "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Software_engineer"
+              }
+            }
+          ],
+          "text": "Software engineer"
+        },
+        {
+          "type": "text",
+          "text": " "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Tim_Peters_(software_engineer)"
+              }
+            }
+          ],
+          "text": "Tim Peters"
+        },
+        {
+          "type": "text",
+          "text": " wrote this set of principles and posted it on the Python mailing list in 1999. Peters's list left open a 20th principle \"for Guido to fill in\", referring to "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Guido_van_Rossum"
+              }
+            }
+          ],
+          "text": "Guido van Rossum"
+        },
+        {
+          "type": "text",
+          "text": ", the original author of the Python language. The vacancy for a 20th principle has not been filled."
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "[1]"
+        },
+        {
+          "type": "text",
+          "text": " ^ In the interpreter easter egg, this is written as \"Although never is often better than "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "italic"
+            }
+          ],
+          "text": "right"
+        },
+        {
+          "type": "text",
+          "text": " now.\" This follows a longstanding convention of "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Plain_text"
+              }
+            }
+          ],
+          "text": "plain-text"
+        },
+        {
+          "type": "text",
+          "text": " communication—in which common formatting features are often impossible—where "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "href": "https://en.wikipedia.org/wiki/Emphasis_(typography)"
+              }
+            }
+          ],
+          "text": "emphasis"
+        },
+        {
+          "type": "text",
+          "text": " is represented with asterisks."
+        }
+      ]
+    }
+  ]
+}
