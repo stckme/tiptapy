@@ -5,15 +5,48 @@ Library that generates HTML output from JSON export of tiptap editor
 import tiptapy
 
 s = """
+
 {
   "type": "doc",
   "content": [
     {
-      "type": "paragraph",
+      "type": "blockquote",
       "content": [
         {
-          "type": "text",
-          "text": "This is some inserted text. 👋"
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "text": "Readability counts."
+            }
+          ]
+        },
+        {
+          "type": "paragraph",
+          "content": [
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "link",
+                  "attrs": { "href": "https://en.wikipedia.org/wiki/Zen_of_Python" }
+                }
+              ],
+              "text": "Zen of Python"
+            },
+            {
+              "type": "text", "text": " By "
+            },
+            {
+              "type": "text",
+              "marks": [
+                {
+                  "type": "bold"
+                }
+              ],
+              "text": "Tom Peters"
+            }
+          ]
         }
       ]
     }
@@ -23,4 +56,14 @@ s = """
 
 out = tiptapy.to_html(s)
 print(out)
-# '<p>This is some inserted text. 👋</p>'
+```
+
+``` {.sourceCode .html}
+<blockquote>
+  <p>Readability counts.</p>
+  <p>
+      <a href="https://en.wikipedia.org/wiki/Zen_of_Python">Zen of Python</a> By 
+      <strong>Tom Peters</strong>
+  </p>
+</blockquote>
+```
