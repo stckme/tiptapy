@@ -52,6 +52,11 @@ class Text(BaseNode):
         return text
 
 
+class Title(BaseContainer):
+    type = "title"
+    wrap_tag = "h1"
+
+
 class Paragraph(BaseContainer):
     type = "paragraph"
     wrap_tag = "p"
