@@ -1,60 +1,38 @@
-import os 
+import os
 import json
 import pytest
 import tiptapy
 
 
-def scan_json_datadir():
-    """Returns a dict for data/json directory"""
-    store = {}
-    json_dir = 'data/json/'
-    json_files = os.listdir(json_dir)
-    for file in json_files:
-        f = open(json_dir + f'{file}')
-        data = f.read()
-        store[file.split('.json')[0]] = json.loads(data)
-    return store
+tags_to_test = (
+    "simple", 
+    "blockquote", 
+    "bulletlist", 
+    "mark_tags"
+)
 
 
-def scan_html_datadir():
-    """Returns a dict for data/html directory"""
-    files = {}
-    html_dir= 'data/html/'
-    html_files = os.listdir(html_dir)
-    for file in html_files:
-        f = open(html_dir + f'{file}')
-        data = f.read()
-        files[file.split('.html')[0]] = data
-    return files
+def build_test_data():
+    """
+    Scan data directories and return test data
+    """
+    store = {'json': {}, 'html': {}}
+    for data_type in store:
+        dir_path = os.path.abspath(f'tests/data/{data_type}/')
+        for file in os.listdir(dir_path):
+            file_path = os.path.join(dir_path, file)
+            with open(file_path) as f:
+                data = f.read()
+                store[data_type][file.split(f'.{data_type}')[0]] = data
+    return store['json'], store['html']
 
 
-json_dir_data = scan_json_datadir()
-html_dir_data = scan_html_datadir()
+json_data, html_data = build_test_data()
 
 
-def test_to_html():
-    """Test to check to_html() function"""
-    input_data = json.dumps(json_dir_data['simple'])
-    expected_html = html_dir_data['simple']
-    assert tiptapy.to_html(input_data) == expected_html
+@pytest.mark.parametrize("tag", tags_to_test)
+def test_html_tag(tag):
+    tag_data = json_data[tag]
+    expected_html = html_data[tag]
+    assert tiptapy.to_html(tag_data) == expected_html
 
-
-def test_blockquote():
-    """Test to check BlockQuote"""
-    blockquote = json.dumps(json_dir_data['blockquote'])
-    expected_html = html_dir_data['blockquote']
-    assert tiptapy.to_html(blockquote) == expected_html
-
-
-def test_bulletlist():
-    """Test to check BulletList"""
-    bulletlist = json.dumps(json_dir_data['bulletlist'])
-    expected_html = html_dir_data['bulletlist']
-    assert tiptapy.to_html(bulletlist) == expected_html
-
-
-def test_text():
-    """Test to check mark_tags bold,italic,link"""
-    mark_tags = json.dumps(json_dir_data['mark_tags'])
-    expected_html = html_dir_data['mark_tags']
-    assert tiptapy.to_html(mark_tags) == expected_html
