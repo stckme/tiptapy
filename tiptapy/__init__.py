@@ -54,23 +54,23 @@ class Text(BaseNode):
 
 class Image(BaseNode):
     type = "image"
-    mark_tags = {"caption": "figcaption"}
+    wrap_tag = "figure"
 
     def inner_render(self, node):
-        formated_html = ""
-        attrs = node['attrs']
-        tags = {key: value for (key, value) in attrs.items()}
-        for k in attrs:
-            if k in self.mark_tags:
-                tag = k
-        del tags[tag]
-        attrs_s = ",".join(f'{k}="{v}"' for k, v in tags.items())
-        formated_html = f"<img {attrs_s}>"
-        for attr in attrs:
-            if attr in self.mark_tags:
-                text = f"<{self.mark_tags[attr]}>{attrs[attr]}</{self.mark_tags[attr]}>"
-                formated_html += text
-        return formated_html
+        special_attrs_map = {'caption': 'figcaption'}
+        attrs = node.get("attrs", {})
+        attrs_s = " ".join(f'{k}="{v}"' for k, v in attrs.items() if k not in special_attrs_map)
+        html = f"<img {attrs_s}>"
+        for attr in special_attrs_map:
+            if attr in attrs:
+                tag = special_attrs_map[attr]
+                html += f"<{tag}> {attrs[attr]} </{tag}>"
+        return html
+
+
+class Title(BaseContainer):
+    type = "title"
+    wrap_tag = "h1"
 
 
 class Paragraph(BaseContainer):
