@@ -52,6 +52,22 @@ class Text(BaseNode):
         return text
 
 
+class Image(BaseNode):
+    type = "image"
+    wrap_tag = "figure"
+
+    def inner_render(self, node):
+        special_attrs_map = {'caption': 'figcaption'}
+        attrs = node.get("attrs", {})
+        attrs_s = " ".join(f'{k}="{v}"' for k, v in attrs.items() if k not in special_attrs_map)
+        html = f"<img {attrs_s}>"
+        for attr in special_attrs_map:
+            if attr in attrs:
+                tag = special_attrs_map[attr]
+                html += f"<{tag}> {attrs[attr]} </{tag}>"
+        return html
+
+
 class Title(BaseContainer):
     type = "title"
     wrap_tag = "h1"
