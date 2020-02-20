@@ -1,5 +1,21 @@
-# tiptapy
-Library that generates HTML output from JSON export of tiptap editor
+<h1 align="center"> Tiptapy </h1>
+<h2 align="center"> Library that generates HTML output from JSON export of tiptap editor</h2>
+
+<p align="center">
+    <a href="https://travis-ci.org/Pradhvan/tiptapy/"><img alt="Build Status"
+    src="https://travis-ci.org/Pradhvan/tiptapy.svg?branch=master"></a>
+    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+    
+</p>
+
+### Install 
+
+
+```bash
+    pip install tiptapy
+```
+
+### Usage
 
 ``` {.sourceCode .python}
 import tiptapy
