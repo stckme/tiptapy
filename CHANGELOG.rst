@@ -2,6 +2,13 @@
 History
 =======
 
+0.4.0 (2020-01-17)
+------------------
+
+* Added tests
+* Travis CI setup 
+* Supported a few tags
+
 0.3.0 (2020-01-17)
 ------------------
 
