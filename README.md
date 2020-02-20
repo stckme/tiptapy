@@ -1,10 +1,10 @@
 <h1 align="center"> Tiptapy </h1>
-<h2 align="center"> Library that generates HTML output from JSON export of tiptap editor</h2>
+<h3 align="center"> Library that generates HTML output from JSON export of tiptap editor</h2>
 
 <p align="center">
     <a href="https://travis-ci.org/Pradhvan/tiptapy/"><img alt="Build Status"
     src="https://travis-ci.org/Pradhvan/tiptapy.svg?branch=master"></a>
-    [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+    <a href="https://github.com/scrolltech/tiptapy/blob/master/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow.svg"</a>
     
 </p>
 
