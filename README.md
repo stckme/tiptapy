@@ -1,5 +1,16 @@
-# tiptapy
-Library that generates HTML output from JSON export of tiptap editor
+# Tiptapy
+### Library that generates HTML output from JSON export of tiptap editor 
+
+[![Travis Build](https://travis-ci.org/Pradhvan/tiptapy.svg?branch=master)](https://travis-ci.org/Pradhvan/tiptapy/)
+
+### Install 
+
+
+```bash
+pip install tiptapy
+```
+
+### Usage
 
 ``` {.sourceCode .python}
 import tiptapy
@@ -58,6 +69,7 @@ out = tiptapy.to_html(s)
 print(out)
 ```
 
+#### Output
 ``` {.sourceCode .html}
 <blockquote>
   <p>Readability counts.</p>
