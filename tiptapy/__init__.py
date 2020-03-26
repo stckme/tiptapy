@@ -59,7 +59,10 @@ class Image(BaseNode):
     def inner_render(self, node):
         special_attrs_map = {'caption': 'figcaption'}
         attrs = node.get("attrs", {})
-        attrs_s = " ".join(f'{k}="{v}"' for k, v in attrs.items() if k not in special_attrs_map)
+        attrs_s = " ".join(f'{k}="{v}"'
+                           for k, v in attrs.items()
+                           if k not in special_attrs_map
+                           )
         html = f"<img {attrs_s}>"
         for attr in special_attrs_map:
             if attr in attrs:
@@ -104,6 +107,11 @@ class Doc(BaseContainer):
     type = "doc"
 
 
+class OrderedList(BaseContainer):
+    type = "ordered_list"
+    wrap_tag = "ol"
+
+
 def register_renderer(cls):
     renderers[cls.type] = cls()
 
@@ -131,6 +139,7 @@ if __name__ == "__main__":
     print(to_html(s))
     print(
         timeit.timeit(
-            "to_html(s)", setup="from __main__ import to_html, s", number=100000
+            "to_html(s)",
+            setup="from __main__ import to_html, s", number=100000
         )
     )
