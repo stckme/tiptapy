@@ -5,10 +5,11 @@ import tiptapy
 
 
 tags_to_test = (
-    "simple", 
-    "blockquote", 
-    "bulletlist", 
-    "mark_tags"
+    "simple",
+    "blockquote",
+    "bulletlist",
+    "mark_tags",
+    "ordered_list"
 )
 
 
@@ -35,4 +36,3 @@ def test_html_tag(tag):
     tag_data = json_data[tag]
     expected_html = html_data[tag]
     assert tiptapy.to_html(tag_data) == expected_html
-
