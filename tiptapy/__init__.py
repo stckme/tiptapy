@@ -24,7 +24,7 @@ class BaseNode:
 class BaseContainer(BaseNode):
     def inner_render(self, nodes: List):
         out = ""
-        for node in nodes["content"]:
+        for node in nodes.get("content", []):
             node_type = node.get("type")
             renderer = renderers.get(node_type)
             assert renderer, f'Unsupported node_type: "{node_type}"'
@@ -120,7 +120,7 @@ def convert_any(in_data):
 
 
 def to_html(s):
-    in_data = json.loads(s)
+    in_data = s if isinstance(s, dict) else json.loads(s)
     return convert_any(in_data)
 
 
