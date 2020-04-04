@@ -1,7 +1,7 @@
 # Tiptapy
 ### Library that generates HTML output from JSON export of tiptap editor 
 
-[![Travis Build](https://travis-ci.org/Pradhvan/tiptapy.svg?branch=master)](https://travis-ci.org/Pradhvan/tiptapy/)
+![tiptapy](https://github.com/scrolltech/tiptapy/workflows/tiptapy/badge.svg)
 
 ### Install 
 
