@@ -1,3 +1,4 @@
+# Deprecated in favour of Github actions based CI
 dist: xenial
 language: python
 python:
