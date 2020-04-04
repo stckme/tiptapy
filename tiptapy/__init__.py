@@ -1,15 +1,15 @@
 import json
 
-from typing import List
+from typing import Dict
 from inspect import isclass
 
 
-renderers = {}
+renderers: Dict = {}
 
 
 class BaseNode:
     type = "prose-mirror_content-type"
-    wrap_tag = None
+    wrap_tag: str = ""
 
     def render(self, in_data):
         out = self.inner_render(in_data)
@@ -22,7 +22,7 @@ class BaseNode:
 
 
 class BaseContainer(BaseNode):
-    def inner_render(self, nodes: List):
+    def inner_render(self, nodes: Dict) -> str:
         out = ""
         for node in nodes.get("content", []):
             node_type = node.get("type")
@@ -54,9 +54,9 @@ class Text(BaseNode):
 
 class Image(BaseNode):
     type = "image"
-    wrap_tag = "figure"
+    wrap_tag: str = "figure"
 
-    def inner_render(self, node):
+    def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
         attrs = node.get("attrs", {})
         attrs_s = " ".join(f'{k}="{v}"'
@@ -73,17 +73,17 @@ class Image(BaseNode):
 
 class Title(BaseContainer):
     type = "title"
-    wrap_tag = "h1"
+    wrap_tag: str = "h1"
 
 
 class Paragraph(BaseContainer):
     type = "paragraph"
-    wrap_tag = "p"
+    wrap_tag: str = "p"
 
 
 class BlockQuote(BaseContainer):
     type = "blockquote"
-    wrap_tag = "blockquote"
+    wrap_tag: str = "blockquote"
 
 
 class HardBreak(BaseContainer):
@@ -95,12 +95,12 @@ class HardBreak(BaseContainer):
 
 class ListItem(BaseContainer):
     type = "list_item"
-    wrap_tag = "li"
+    wrap_tag: str = "li"
 
 
 class BulletList(BaseContainer):
     type = "bullet_list"
-    wrap_tag = "ul"
+    wrap_tag: str = "ul"
 
 
 class Doc(BaseContainer):
@@ -109,7 +109,7 @@ class Doc(BaseContainer):
 
 class OrderedList(BaseContainer):
     type = "ordered_list"
-    wrap_tag = "ol"
+    wrap_tag: str = "ol"
 
 
 def register_renderer(cls):
