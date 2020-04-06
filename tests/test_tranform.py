@@ -9,7 +9,8 @@ tags_to_test = (
     "blockquote",
     "bulletlist",
     "mark_tags",
-    "ordered_list"
+    "ordered_list",
+    "feature_image"
 )
 
 

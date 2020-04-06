@@ -71,6 +71,25 @@ class Image(BaseNode):
         return html
 
 
+class FeatureImage(Image):
+    type = "featureimage"
+    wrap_tag: str = "figure"
+
+    def inner_render(self, node) -> str:
+        special_attrs_map = {'caption': 'figcaption'}
+        attrs = node.get("attrs", {})
+        attrs_s = " ".join(f'{k}="{v}"'
+                           for k, v in attrs.items()
+                           if k not in special_attrs_map
+                           )
+        html = f"<picture><img {attrs_s}><picture>"
+        for attr in special_attrs_map:
+            if attr in attrs:
+                tag = special_attrs_map[attr]
+                html += f"<{tag}> {attrs[attr]} </{tag}>"
+        return html
+
+
 class Title(BaseContainer):
     type = "title"
     wrap_tag: str = "h1"
@@ -105,6 +124,11 @@ class BulletList(BaseContainer):
 
 class Doc(BaseContainer):
     type = "doc"
+
+
+class Header(BaseContainer):
+    type = "header"
+    wrap_tag: str = "header"
 
 
 class OrderedList(BaseContainer):
