@@ -1,7 +1,7 @@
 import os
-import json
 import pytest
 import tiptapy
+from tiptapy import extras
 
 
 tags_to_test = (
@@ -9,7 +9,8 @@ tags_to_test = (
     "blockquote",
     "bulletlist",
     "mark_tags",
-    "ordered_list"
+    "ordered_list",
+    "featureimage"
 )
 
 
