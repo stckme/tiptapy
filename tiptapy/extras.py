@@ -3,7 +3,6 @@ from . import BaseNode, register_renderer
 
 class FeatureImage(BaseNode):
     type = "featureimage"
-    wrap_tag: str = "figure"
 
     def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
@@ -18,7 +17,7 @@ class FeatureImage(BaseNode):
         if attrs.get('caption'):
             tag = special_attrs_map['caption']
             html += f"<{tag}> {attrs['caption']} </{tag}>"
-        return html
+        return f'<figure class="featured-image">{html}</figure>'
 
 
 register_renderer(FeatureImage)
