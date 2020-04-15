@@ -10,7 +10,7 @@ tags_to_test = (
     "bulletlist",
     "mark_tags",
     "ordered_list",
-    "featuredimage"
+    "featureimage"
 )
 
 
