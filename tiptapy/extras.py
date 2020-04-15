@@ -1,8 +1,8 @@
 from . import BaseNode, register_renderer
 
 
-class FeatureImage(BaseNode):
-    type = "featureimage"
+class FeaturedImage(BaseNode):
+    type = "featuredimage"
 
     def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
@@ -19,4 +19,4 @@ class FeatureImage(BaseNode):
         return f'<figure class="featured-image">{html}</figure>'
 
 
-register_renderer(FeatureImage)
+register_renderer(FeaturedImage)
