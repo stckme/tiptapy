@@ -63,9 +63,9 @@ class Image(BaseNode):
                            if k not in special_attrs_map and v.strip()
                            )
         html = f"<img {attrs_s}>"
-        if attrs.get('caption').strip():
+        if attrs.get('caption', '').strip():
             tag = special_attrs_map['caption']
-            html += f"<{tag}> {attrs['caption']} </{tag}>"
+            html += f"<{tag}>{attrs['caption']}</{tag}>"
         return html
 
 
