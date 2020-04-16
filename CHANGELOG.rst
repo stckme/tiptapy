@@ -2,6 +2,10 @@
 History
 =======
 
+0.5.0 (2020-04-16)
+------------------
+* Added extras module to support non upstream (tiptap) supported blocks
+
 0.4.1 (2020-03-27)
 ------------------
 * Supported ordered lists
