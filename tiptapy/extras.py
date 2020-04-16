@@ -9,13 +9,12 @@ class FeaturedImage(BaseNode):
         attrs = node.get("attrs", {})
         attrs_s = " ".join(f'{k}="{v}"'
                            for k, v in attrs.items()
-                           if k not in special_attrs_map
+                           if k not in special_attrs_map and v.strip()
                            )
         html = f"<picture><img {attrs_s}></picture>"
-        for attr in special_attrs_map:
-            if attr in attrs:
-                tag = special_attrs_map[attr]
-                html += f"<{tag}> {attrs[attr]} </{tag}>"
+        if attrs.get('caption').strip():
+            tag = special_attrs_map['caption']
+            html += f"<{tag}> {attrs['caption']} </{tag}>"
         return f'<figure class="featured-image">{html}</figure>'
 
 
