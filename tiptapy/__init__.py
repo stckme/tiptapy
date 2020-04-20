@@ -91,6 +91,13 @@ class HardBreak(BaseContainer):
         return "<br>"
 
 
+class HorizontalRule(BaseContainer):
+    type = "horizontal_rule"
+
+    def inner_render(self, node):
+        return "<hr>"
+
+
 class ListItem(BaseContainer):
     type = "list_item"
     wrap_tag: str = "li"
