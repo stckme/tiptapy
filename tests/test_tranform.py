@@ -11,7 +11,8 @@ tags_to_test = (
     "mark_tags",
     "ordered_list",
     "image",
-    "featuredimage"
+    "featuredimage",
+    "horizontal_rule"
 )
 
 
