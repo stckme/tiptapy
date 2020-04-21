@@ -69,6 +69,14 @@ class Image(BaseNode):
         return html
 
 
+class Embed(BaseContainer):
+    type = "embed"
+
+    def inner_render(self, node):
+        attrs = node['attrs']
+        return attrs.get('html', '')
+
+
 class Title(BaseContainer):
     type = "title"
     wrap_tag: str = "h1"
