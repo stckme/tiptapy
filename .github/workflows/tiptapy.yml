@@ -37,4 +37,6 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
+        pip install mypy
         pytest
+        mypy tiptapy
