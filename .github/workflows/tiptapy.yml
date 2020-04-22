@@ -37,6 +37,9 @@ jobs:
     - name: Test with pytest
       run: |
         pip install pytest
-        pip install mypy
         pytest
+    - name: Type Checking With mypy
+      run: |
+        pip install mypy
         mypy tiptapy
+    
