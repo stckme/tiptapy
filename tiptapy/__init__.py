@@ -3,6 +3,7 @@ from typing import Dict
 from inspect import isclass
 
 
+version="0.5.1",
 renderers: Dict = {}
 
 
