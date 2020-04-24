@@ -2,6 +2,13 @@
 History
 =======
 
+0.6.0 (2020-04-24)
+------------------
+* New node: Embed
+* Docstrings for base classes
+* Simplified testing
+* Bumpversion support added for easier release process
+
 0.5.0 (2020-04-16)
 ------------------
 * Added extras module to support non upstream (tiptap) supported blocks
