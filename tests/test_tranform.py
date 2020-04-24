@@ -12,7 +12,8 @@ tags_to_test = (
     "ordered_list",
     "image",
     "featuredimage",
-    "horizontal_rule"
+    "horizontal_rule",
+    "embed"
 )
 
 
