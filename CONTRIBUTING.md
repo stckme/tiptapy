@@ -10,4 +10,6 @@ pytest -xv
 
 ```
 python setup.py build sdist
-
+bumpversion --dry-run --verbose patch  # or major, minor
+bumpversion --dry-run patch  # or major, minor
+```
