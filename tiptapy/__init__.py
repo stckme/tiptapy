@@ -7,20 +7,28 @@ renderers: Dict = {}
 
 
 class BaseNode:
+    """
+    Base Node class with reference implemention for common cases.
+    This should be used as base class for all leaf level nodes which do not contain
+    other nodes.
+    """
     type = "prose-mirror_content-type"
     wrap_tag: str = ""
 
-    def render(self, in_data):
+    def render(self, in_data) -> str:
         out = self.inner_render(in_data)
         if self.wrap_tag:
             return f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
         return out
 
-    def inner_render(self, node):
-        return node["content"]
+    def inner_render(self, node) -> str:
+        return node["content"]["text"]
 
 
 class BaseContainer(BaseNode):
+    """
+    Base class for container type nodes which may further contain other nodes.
+    """
     def inner_render(self, nodes: Dict) -> str:
         out = ""
         for node in nodes.get("content", []):
@@ -99,7 +107,7 @@ class HardBreak(BaseContainer):
         return "<br>"
 
 
-class HorizontalRule(BaseContainer):
+class HorizontalRule(BaseNode):
     type = "horizontal_rule"
 
     def inner_render(self, node):
