@@ -3,15 +3,14 @@ from typing import Dict
 from inspect import isclass
 
 
-version="__version__ = '0.6.0'",
+version = "__version__ = '0.6.0'"
 renderers: Dict = {}
 
 
 class BaseNode:
-    """
-    Base Node class with reference implemention for common cases.
-    This should be used as base class for all leaf level nodes which do not contain
-    other nodes.
+    """Base Node class with reference implemention for common cases.
+    This should be used as base class for all leaf level nodes which
+    do not contain other nodes.
     """
     type = "prose-mirror_content-type"
     wrap_tag: str = ""
@@ -22,14 +21,15 @@ class BaseNode:
             return f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
         return out
 
-    def inner_render(self, node) -> str:
+    @staticmethod
+    def inner_render(node: Dict) -> str:
         return node["content"]["text"]
 
 
 class BaseContainer(BaseNode):
+    """Base class for container type nodes which may further contain other nodes.
     """
-    Base class for container type nodes which may further contain other nodes.
-    """
+
     def inner_render(self, nodes: Dict) -> str:
         out = ""
         for node in nodes.get("content", []):
@@ -104,7 +104,7 @@ class BlockQuote(BaseContainer):
 class HardBreak(BaseContainer):
     type = "hard_break"
 
-    def inner_render(self, node):
+    def inner_render(self):
         return "<br>"
 
 
@@ -135,6 +135,12 @@ class OrderedList(BaseContainer):
 
 
 def register_renderer(cls):
+    """Adds the node to the renderes dict for BaseNode to use it.
+
+    Args:
+        param: a type object, cls.
+
+    """
     renderers[cls.type] = cls()
 
 
@@ -144,13 +150,28 @@ for o in tuple(locals().values()):
 
 
 def convert_any(in_data):
+    """Helper function to return a string of HTML.
+    The input expected here is to be python object.
+
+    Args:
+        param: Dict to be converted into HTML
+
+    Returns: The html string.
+    """
     typ = in_data.get("type")
     renderer = renderers.get(typ)
     return renderer.render(in_data)
 
 
-def to_html(s):
-    in_data = s if isinstance(s, dict) else json.loads(s)
+def to_html(data: Dict) -> str:
+    """Helper function to return a string of HTML.
+
+    Args:
+        param: Dict/JSON to be converted into HTML
+
+    Returns: The html string.
+    """
+    in_data = data if isinstance(data, dict) else json.loads(data)
     return convert_any(in_data)
 
 
