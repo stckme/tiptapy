@@ -3,7 +3,7 @@ from typing import Dict
 from inspect import isclass
 
 
-version="__version__ = '0.6.0'",
+version = "__version__ = '0.6.0'",
 renderers: Dict = {}
 
 
@@ -30,6 +30,7 @@ class BaseContainer(BaseNode):
     """
     Base class for container type nodes which may further contain other nodes.
     """
+
     def inner_render(self, nodes: Dict) -> str:
         out = ""
         for node in nodes.get("content", []):
@@ -81,9 +82,12 @@ class Image(BaseNode):
 class Embed(BaseContainer):
     type = "embed"
 
-    def inner_render(self, node):
+    def inner_render(self, node) -> str:
         attrs = node['attrs']
-        return attrs.get('html', '')
+        html = attrs.get('html', '')
+        if attrs.get('type') == 'video' and attrs.get('caption').strip():
+            html += f"<figcaption>{attrs['caption']}</figcaption>"
+        return html
 
 
 class Title(BaseContainer):
