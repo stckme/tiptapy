@@ -2,8 +2,8 @@ import json
 from typing import Dict
 from inspect import isclass
 
+__version__ = '0.6.1'
 
-version = "__version__ = '0.6.0'",
 renderers: Dict = {}
 
 
