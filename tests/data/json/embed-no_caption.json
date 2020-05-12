@@ -1,0 +1,15 @@
+{
+  "type": "embed",
+  "attrs": {
+    "title": "Extraction | Chris Hemsworth | Official Trailer | Netflix India",
+    "description": "A hardened mercenary's mission becomes a soul-searching race to survive when he's sent into Bangladesh to rescue a drug lord's kidnapped son.",
+    "type": "video", 
+    "url": "https://youtu.be/GJQsT-h0FTU",
+    "thumbnail_url": "https://www.imdb.com/title/tt8936646/mediaviewer/rm2618735617?ref_=tt_ov_i",
+    "thumbnail_width": 290,
+    "thumbnail_height": 234,
+    "caption": " ",
+    "provider": "Youtube",
+    "html": "<iframe width=\"480\" height=\"270\" src=\"https://www.youtube.com/embed/GJQsT-h0FTU?feature=oembed\" frameborder=\"0\"  allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>"
+  }
+}

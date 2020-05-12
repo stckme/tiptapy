@@ -2,7 +2,7 @@ import json
 from typing import Dict
 from inspect import isclass
 
-__version__ = '0.6.1'
+__version__ = '0.6.3'
 
 renderers: Dict = {}
 
@@ -85,9 +85,11 @@ class Embed(BaseContainer):
     def inner_render(self, node) -> str:
         attrs = node['attrs']
         html = attrs.get('html', '')
-        if attrs.get('type') == 'video' and attrs.get('caption').strip():
-            html += f"<figcaption>{attrs['caption']}</figcaption>"
-        return html
+        if attrs.get('type') == 'video':
+            caption = attrs.get('caption', '').strip()
+            if caption:
+                html += f"<figcaption>{caption}</figcaption>"
+        return f'<div class="video-wrapper"><figure>{html}</figure></div>'
 
 
 class Title(BaseContainer):
