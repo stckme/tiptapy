@@ -1,6 +1,7 @@
 import os
 import pytest
 import tiptapy
+import json
 from tiptapy import extras
 
 
@@ -11,9 +12,15 @@ tags_to_test = (
     "mark_tags",
     "ordered_list",
     "image",
+    "image-missing_caption",
+    "image-no_caption",
     "featuredimage",
+    "featuredimage-missing_caption",
+    "featuredimage-no_caption",
     "horizontal_rule",
-    "embed"
+    "embed",
+    "embed-missing_caption",
+    "embed-no_caption"
 )
 
 
@@ -37,6 +44,9 @@ json_data, html_data = build_test_data()
 
 @pytest.mark.parametrize("tag", tags_to_test)
 def test_html_tag(tag):
+    """
+    Test expected json input with the expected html.
+    """
     tag_data = json_data[tag]
     expected_html = html_data[tag]
     assert tiptapy.to_html(tag_data) == expected_html
