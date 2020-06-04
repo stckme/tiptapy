@@ -2,7 +2,7 @@ import json
 from typing import Dict
 from inspect import isclass
 
-__version__ = '0.6.3'
+__version__ = '0.6.4'
 
 renderers: Dict = {}
 
@@ -10,8 +10,8 @@ renderers: Dict = {}
 class BaseNode:
     """
     Base Node class with reference implemention for common cases.
-    This should be used as base class for all leaf level nodes which do not contain
-    other nodes.
+    This should be used as base class for all leaf level nodes
+    which do not contain other nodes.
     """
     type = "prose-mirror_content-type"
     wrap_tag: str = ""
@@ -89,7 +89,9 @@ class Embed(BaseContainer):
             caption = attrs.get('caption', '').strip()
             if caption:
                 html += f"<figcaption>{caption}</figcaption>"
-        return f'<div class="video-wrapper"><figure>{html}</figure></div>'
+        provider_name = attrs.get('provider') or 'link'
+        rendered_html = f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
+        return rendered_html
 
 
 class Title(BaseContainer):
