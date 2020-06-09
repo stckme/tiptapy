@@ -2,6 +2,10 @@
 History
 =======
 
+0.6.5 (2020-06-09)
+------------------
+* Heading block added
+
 0.6.4 (2020-06-08)
 ------------------
 * Improved Embed block rendered html output.

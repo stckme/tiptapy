@@ -20,7 +20,8 @@ tags_to_test = (
     "horizontal_rule",
     "embed",
     "embed-missing_caption",
-    "embed-no_caption"
+    "embed-no_caption",
+    "heading"
 )
 
 
