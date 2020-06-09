@@ -90,8 +90,7 @@ class Embed(BaseContainer):
             if caption:
                 html += f"<figcaption>{caption}</figcaption>"
         provider_name = attrs.get('provider') or 'link'
-        rendered_html = f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
-        return rendered_html
+        return f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
 
 
 class Title(BaseContainer):
