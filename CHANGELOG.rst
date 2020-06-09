@@ -2,6 +2,10 @@
 History
 =======
 
+0.6.4 (2020-06-08)
+------------------
+* Improved Embed block rendered html output.
+
 0.6.3 (2020-04-24)
 ------------------
 * Media tags tests improved
