@@ -65,7 +65,6 @@ class Heading(Text):
     type = "heading"
 
     def inner_render(self, node) -> str:
-        html = ""
         attrs = node['attrs']
         level = attrs.get('level') or 1
         tag = f"h{level}"
