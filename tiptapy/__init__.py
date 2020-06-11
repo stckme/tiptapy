@@ -67,15 +67,11 @@ class Heading(Text):
     def inner_render(self, node) -> str:
         html = ""
         attrs = node['attrs']
-        level = attrs.get('level') or 3
-        heading_block = f"h{level}"
-        contents = node.get('content')
-        rendered_html = ''
-        if contents:
-            for num in range(len(contents)):
-                html += Text.inner_render(self, contents[num])
-            rendered_html = f"<{heading_block}>{html}</{heading_block}>"
-        return rendered_html
+        level = attrs.get('level') or 1
+        tag = f"h{level}"
+        cnodes = node.get('content')
+        inner_html = ''.join(Text.inner_render(self, cnode) for cnode in cnodes)
+        return f"<{tag}>{inner_html}</{tag}>"
 
 
 class Image(BaseNode):
