@@ -1,7 +1,35 @@
 {
-  "type": "heading",
-  "attrs": {
-    "level": 1
-  },
-  "content": "Baby Beets With Horseradish Panna Cotta"
+  "type": "doc",
+  "content": [
+    {
+      "type": "heading",
+      "attrs": {
+        "level": 2
+      },
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ],
+          "text": "This"
+        },
+        {
+          "type": "text",
+          "text": " is a "
+        },
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "italic"
+            }
+          ],
+          "text": "content"
+        }
+      ]
+    }
+  ]
 }

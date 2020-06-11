@@ -2,7 +2,7 @@ import json
 from typing import Dict
 from inspect import isclass
 
-__version__ = '0.6.5'
+__version__ = '0.6.6'
 
 renderers: Dict = {}
 
@@ -61,6 +61,23 @@ class Text(BaseNode):
         return text
 
 
+class Heading(Text):
+    type = "heading"
+
+    def inner_render(self, node) -> str:
+        html = ""
+        attrs = node['attrs']
+        level = attrs.get('level') or 3
+        heading_block = f"h{level}"
+        contents = node.get('content')
+        rendered_html = ''
+        if contents:
+            for num in range(len(contents)):
+                html += Text.inner_render(self, contents[num])
+            rendered_html = f"<{heading_block}>{html}</{heading_block}>"
+        return rendered_html
+
+
 class Image(BaseNode):
     type = "image"
     wrap_tag: str = "figure"
@@ -91,16 +108,6 @@ class Embed(BaseContainer):
                 html += f"<figcaption>{caption}</figcaption>"
         provider_name = attrs.get('provider') or 'link'
         return f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
-
-
-class Heading(BaseContainer):
-    type = "heading"
-
-    def inner_render(self, node) -> str:
-        attrs = node['attrs']
-        level = attrs.get('level') or 3
-        content = node.get('content', '')
-        return f"<h{level}>{content}</h{level}>"
 
 
 class Title(BaseContainer):
