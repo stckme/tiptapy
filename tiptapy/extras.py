@@ -11,11 +11,15 @@ class FeaturedImage(BaseNode):
                            for k, v in attrs.items()
                            if k not in special_attrs_map and v.strip()
                            )
-        html = f"<picture><img {attrs_s}></picture>"
-        if attrs.get('caption', '').strip():
+        image = f"<picture><img {attrs_s}></picture>"
+        caption = attrs.get('caption', '').strip()
+        if caption:
             tag = special_attrs_map['caption']
-            html += f"<{tag}>{attrs['caption']}</{tag}>"
-        return f'<figure class="featured-image">{html}</figure>'
+            image += f"<{tag}>{attrs['caption']}</{tag}>"
+        rendered_html = " "
+        if attrs_s:
+            rendered_html = f'<figure class="featured-image">{image}</figure>'
+        return rendered_html
 
 
 register_renderer(FeaturedImage)

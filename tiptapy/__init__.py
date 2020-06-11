@@ -2,7 +2,7 @@ import json
 from typing import Dict
 from inspect import isclass
 
-__version__ = '0.6.5'
+__version__ = '0.6.6'
 
 renderers: Dict = {}
 
@@ -63,7 +63,6 @@ class Text(BaseNode):
 
 class Image(BaseNode):
     type = "image"
-    wrap_tag: str = "figure"
 
     def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
@@ -72,11 +71,16 @@ class Image(BaseNode):
                            for k, v in attrs.items()
                            if k not in special_attrs_map and v.strip()
                            )
-        html = f"<img {attrs_s}>"
-        if attrs.get('caption', '').strip():
+        img = f"<img {attrs_s}>"
+        caption = attrs.get('caption', '').strip()
+        if caption:
             tag = special_attrs_map['caption']
-            html += f"<{tag}>{attrs['caption']}</{tag}>"
-        return html
+            img += f"<{tag}>{attrs['caption']}</{tag}>"
+        rendered_html = " "
+        if attrs_s:
+            rendered_html = f"<figure>{img}</figure>"
+        return rendered_html
+
 
 
 class Embed(BaseContainer):
