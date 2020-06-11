@@ -4,8 +4,6 @@ History
 
 0.6.6 (2020-06-11)
 ------------------
-
-=======
 * Improved Heading Block to accept nested text content
 * Image and FeatureImage block return empty string on no image 
 
