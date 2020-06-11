@@ -2,6 +2,10 @@
 History
 =======
 
+0.6.6 (2020-06-11)
+------------------
+* Improved Heading Block to accept nested text content 
+
 0.6.5 (2020-06-09)
 ------------------
 * Heading block added
