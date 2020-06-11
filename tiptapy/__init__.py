@@ -61,6 +61,18 @@ class Text(BaseNode):
         return text
 
 
+class Heading(Text):
+    type = "heading"
+
+    def inner_render(self, node) -> str:
+        attrs = node['attrs']
+        level = attrs.get('level') or 1
+        tag = f"h{level}"
+        cnodes = node.get('content')
+        inner_html = ''.join(Text.inner_render(self, cnode) for cnode in cnodes)
+        return f"<{tag}>{inner_html}</{tag}>"
+
+
 class Image(BaseNode):
     type = "image"
 
@@ -95,16 +107,6 @@ class Embed(BaseContainer):
                 html += f"<figcaption>{caption}</figcaption>"
         provider_name = attrs.get('provider') or 'link'
         return f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
-
-
-class Heading(BaseContainer):
-    type = "heading"
-
-    def inner_render(self, node) -> str:
-        attrs = node['attrs']
-        level = attrs.get('level') or 3
-        content = node.get('content', '')
-        return f"<h{level}>{content}</h{level}>"
 
 
 class Title(BaseContainer):
