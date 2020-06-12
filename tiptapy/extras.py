@@ -14,8 +14,7 @@ class FeaturedImage(BaseNode):
                            )
         if attrs_s:
             inner_html = f"<img {attrs_s}>"
-            caption = attrs.get('caption', '').strip()
-            if caption:
+            if attrs.get('caption', '').strip():
                 tag = special_attrs_map['caption']
                 inner_html += f"<{tag}>{attrs['caption']}</{tag}>"
             html = f'<figure class="featured-image">{inner_html}</figure>'
