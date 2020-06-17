@@ -40,7 +40,8 @@
               {
                 "type": "link",
                 "attrs": {
-                  "href": "https://foobar.withgoogle.com/"
+                  "href": "https://foobar.withgoogle.com/",
+                  "title":""
                 }
               }
             ],

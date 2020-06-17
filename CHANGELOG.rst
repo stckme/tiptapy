@@ -2,6 +2,10 @@
 History
 =======
 
+0.6.7 (2020-06-17)
+------------------
+* Standardized anchor tag for known and unkown providers 
+
 0.6.6 (2020-06-11)
 ------------------
 * Improved Heading Block to accept nested text content 

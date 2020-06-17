@@ -1,8 +1,9 @@
 import json
 from typing import Dict
 from inspect import isclass
+from urllib.parse import urlparse
 
-__version__ = '0.6.6'
+__version__ = '0.6.7'
 
 renderers: Dict = {}
 
@@ -45,6 +46,7 @@ class BaseContainer(BaseNode):
 class Text(BaseNode):
     type = "text"
     mark_tags = {"bold": "strong", "italic": "em", "link": "a"}
+    known_provider = 'scrollstack.com'
 
     def inner_render(self, node):
         text = node["text"]
@@ -54,7 +56,18 @@ class Text(BaseNode):
                 tag = self.mark_tags.get(mark.get("type"))
                 attrs = mark.get("attrs")
                 if attrs:
-                    attrs_s = " ".join(f'{k}="{v}"' for k, v in attrs.items())
+                    if tag == 'a':
+                        url = attrs.get("href") or ''
+                        if url:
+                            link = urlparse(url)
+                            # Getting the domain of the link
+                            link = link.netloc
+                            if self.known_provider not in link:
+                                attrs["target"] = "_blank"
+                                attrs["rel"] = "noopener nofollow"
+                    attrs_s = " ".join(f'{k}="{v}"'
+                                        for k, v in attrs.items()
+                                        if v.strip())
                     text = f"<{tag} {attrs_s}>{text}</{tag}>"
                 else:
                     text = f"<{tag}>{text}</{tag}>"
@@ -69,7 +82,8 @@ class Heading(Text):
         level = attrs.get('level') or 1
         tag = f"h{level}"
         cnodes = node.get('content')
-        inner_html = ''.join(Text.inner_render(self, cnode) for cnode in cnodes)
+        inner_html = ''.join(Text.inner_render(self, cnode)
+                             for cnode in cnodes)
         return f"<{tag}>{inner_html}</{tag}>"
 
 
