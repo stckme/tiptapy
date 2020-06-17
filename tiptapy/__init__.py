@@ -2,7 +2,7 @@ import json
 from typing import Dict
 from inspect import isclass
 
-__version__ = '0.6.6'
+__version__ = '0.6.7'
 
 renderers: Dict = {}
 
