@@ -22,7 +22,6 @@ tags_to_test = (
     "embed-missing_caption",
     "embed-no_caption",
     "heading",
-    "is_renderable",
 )
 
 
