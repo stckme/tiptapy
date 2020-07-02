@@ -1,0 +1,22 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "featuredimage",
+      "attrs": {
+        "src": "",
+        "alt": "",
+        "caption": ""
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Quick Brown Fox jumps over the lazy dog"
+        }
+      ]
+    }
+  ]
+}

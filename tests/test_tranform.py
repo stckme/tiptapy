@@ -21,7 +21,7 @@ tags_to_test = (
     "embed",
     "embed-missing_caption",
     "embed-no_caption",
-    "heading"
+    "heading",
 )
 
 

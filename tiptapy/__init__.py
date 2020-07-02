@@ -2,7 +2,7 @@ import json
 from typing import Dict
 from inspect import isclass
 
-__version__ = '0.6.6'
+__version__ = '0.6.7'
 
 renderers: Dict = {}
 
@@ -15,6 +15,15 @@ class BaseNode:
     """
     type = "prose-mirror_content-type"
     wrap_tag: str = ""
+
+    def is_renderable(self, node):
+        """
+        Suggests if the node is worth rendering. 
+        Example: Image block without src attribute might not. 
+        This doesn't affect node rendering however can be considered
+        by high level functions such as convert_any here
+        """
+        return True
 
     def render(self, in_data) -> str:
         out = self.inner_render(in_data)
@@ -76,6 +85,11 @@ class Heading(Text):
 class Image(BaseNode):
     type = "image"
     wrap_tag: str = "figure"
+
+    def is_renderable(self, node):
+        attrs = node.get("attrs", {})
+        return bool(attrs.get('src', '').strip())
+
 
     def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
@@ -165,7 +179,9 @@ for o in tuple(locals().values()):
 def convert_any(in_data):
     typ = in_data.get("type")
     renderer = renderers.get(typ)
-    return renderer.render(in_data)
+    if renderer.is_renderable(in_data):
+        return renderer.render(in_data)
+    return ''
 
 
 def to_html(s):
