@@ -17,14 +17,18 @@ class BaseNode:
     wrap_tag: str = ""
 
     def is_renderable(self, node):
+        """
+        Suggests if the node is worth rendering. 
+        Example: Image block without src attribute might not. 
+        This doesn't affect node rendering however can be considered
+        by high level functions such as convert_any here
+        """
         return True
 
     def render(self, in_data) -> str:
-        out = ''
-        if self.is_renderable(in_data):
-            out = self.inner_render(in_data)
-            if self.wrap_tag:
-                return f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
+        out = self.inner_render(in_data)
+        if self.wrap_tag:
+            return f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
         return out
 
     def inner_render(self, node) -> str:
@@ -84,9 +88,8 @@ class Image(BaseNode):
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
-        if attrs.get('src', '').strip():
-            return True
-        return False
+        return bool(attrs.get('src', '').strip())
+
 
     def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
