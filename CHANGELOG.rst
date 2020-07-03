@@ -1,6 +1,13 @@
 =======
 History
 =======
+0.6.8 (2020-07-03)
+------------------
+* `is_renderable` is made mandatory in render function to validate JSON data.
+
+0.6.7 (2020-07-02)
+------------------
+* Added optional `is_renderable` function in the base node.
 
 0.6.6 (2020-06-11)
 ------------------
