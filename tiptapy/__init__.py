@@ -18,8 +18,8 @@ class BaseNode:
 
     def is_renderable(self, node):
         """
-        Suggests if the node is worth rendering. 
-        Example: Image block without src attribute might not. 
+        Suggests if the node is worth rendering.
+        Example: Image block without src attribute might not.
         This doesn't affect node rendering however can be considered
         by high level functions such as convert_any here
         """
@@ -112,7 +112,7 @@ class Embed(BaseContainer):
         attrs = node['attrs']
         html = attrs.get('html', '')
         if attrs.get('type') == 'video':
-            caption = attrs.get('caption', '').strip()
+            caption = (attrs.get('caption') or '').strip()
             if caption:
                 html += f"<figcaption>{caption}</figcaption>"
         provider_name = attrs.get('provider') or 'link'
