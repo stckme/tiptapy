@@ -1,4 +1,6 @@
 import json
+
+from html import escape as e
 from typing import Dict
 from inspect import isclass
 
@@ -32,7 +34,7 @@ class BaseNode:
         return out
 
     def inner_render(self, node) -> str:
-        return node["content"]["text"]
+        return e(node["content"]["text"])
 
 
 class BaseContainer(BaseNode):
@@ -56,29 +58,28 @@ class Text(BaseNode):
     mark_tags = {"bold": "strong", "italic": "em", "link": "a"}
 
     def inner_render(self, node):
-        text = node["text"]
+        text = e(node["text"])
         marks = node.get("marks")
         if marks:
             for mark in marks:
                 tag = self.mark_tags.get(mark.get("type"))
                 attrs = mark.get("attrs")
                 if attrs:
-                    attrs_s = " ".join(f'{k}="{v}"' for k, v in attrs.items())
+                    attrs_s = " ".join(f'{k}="{e(v)}"' for k, v in attrs.items())
                     text = f"<{tag} {attrs_s}>{text}</{tag}>"
                 else:
                     text = f"<{tag}>{text}</{tag}>"
         return text
 
 
-class Heading(Text):
+class Heading(BaseContainer):
     type = "heading"
 
     def inner_render(self, node) -> str:
         attrs = node['attrs']
         level = attrs.get('level') or 1
-        tag = f"h{level}"
-        cnodes = node.get('content')
-        inner_html = ''.join(Text.inner_render(self, cnode) for cnode in cnodes)
+        tag = e(f"h{level}")
+        inner_html = super().inner_render(node)
         return f"<{tag}>{inner_html}</{tag}>"
 
 
@@ -99,9 +100,10 @@ class Image(BaseNode):
                            if k not in special_attrs_map and v.strip()
                            )
         html = f"<img {attrs_s}>"
-        if attrs.get('caption', '').strip():
+        caption = attrs.get('caption', '').strip()
+        if caption:
             tag = special_attrs_map['caption']
-            html += f"<{tag}>{attrs['caption']}</{tag}>"
+            html += f"<{tag}>{e(caption)}</{tag}>"
         return html
 
 
