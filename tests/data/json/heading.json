@@ -20,6 +20,10 @@
           "type": "text",
           "text": " is a "
         },
+
+        {
+            "type": "hard_break"
+        },
         {
           "type": "text",
           "marks": [
@@ -27,7 +31,7 @@
               "type": "italic"
             }
           ],
-          "text": "content"
+          "text": "word"
         }
       ]
     }

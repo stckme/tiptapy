@@ -1,6 +1,11 @@
 =======
 History
 =======
+0.7.0 (2020-07-06)
+------------------
+* Corrected Heading node to be a container type
+* Added long pending HTML escaping
+
 0.6.8 (2020-07-03)
 ------------------
 * `is_renderable` is made mandatory in render function to validate JSON data.
