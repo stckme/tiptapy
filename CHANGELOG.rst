@@ -1,6 +1,10 @@
 =======
 History
 =======
+0.7.1 (2020-07-06)
+------------------
+* Standardized anchor tag for known and unkown providers 
+
 0.7.0 (2020-07-06)
 ------------------
 * Corrected Heading node to be a container type

@@ -3,6 +3,7 @@ import json
 from html import escape as e
 from typing import Dict
 from inspect import isclass
+from urllib.parse import urlparse
 
 __version__ = '0.7.0'
 
@@ -53,6 +54,13 @@ class BaseContainer(BaseNode):
         return out
 
 
+class config:
+    """
+    Config class to store constans which are used by the othe nodes.
+    """
+    DOMAIN = "python.org"
+
+
 class Text(BaseNode):
     type = "text"
     mark_tags = {"bold": "strong", "italic": "em", "link": "a"}
@@ -65,6 +73,11 @@ class Text(BaseNode):
                 tag = self.mark_tags.get(mark.get("type"))
                 attrs = mark.get("attrs")
                 if attrs:
+                    if tag == "a":
+                        url = attrs.get("href") or ""
+                        if not is_trusted_link(url):
+                            attrs["target"] = "_blank"
+                            attrs["rel"] = "noopener nofollow"
                     attrs_s = " ".join(f'{k}="{e(v)}"' for k, v in attrs.items())
                     text = f"<{tag} {attrs_s}>{text}</{tag}>"
                 else:
@@ -90,7 +103,6 @@ class Image(BaseNode):
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
         return bool(attrs.get('src', '').strip())
-
 
     def inner_render(self, node) -> str:
         special_attrs_map = {'caption': 'figcaption'}
@@ -182,6 +194,16 @@ def convert_any(in_data):
     typ = in_data.get("type")
     renderer = renderers.get(typ)
     return renderer.render(in_data)
+
+
+def is_trusted_link(url):
+    """
+    Check if the domain is the same as in the config.
+    """
+    link = urlparse(url)
+    # Getting the domain of the link
+    link = link.netloc
+    return link.endswith(config.DOMAIN)
 
 
 def to_html(s):
