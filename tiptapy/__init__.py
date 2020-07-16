@@ -102,20 +102,28 @@ class Image(BaseNode):
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
-        return bool(attrs.get('src', '').strip())
+        src = attrs.get("src", {})
+        return bool(
+            src.get('image', '').strip() and src.get('fallback', '').strip()
+        )
 
     def inner_render(self, node) -> str:
-        special_attrs_map = {'caption': 'figcaption'}
         attrs = node.get("attrs", {})
-        attrs_s = " ".join(f'{k}="{v}"'
-                           for k, v in attrs.items()
-                           if k not in special_attrs_map and v.strip()
-                           )
-        html = f"<img {attrs_s}>"
-        caption = attrs.get('caption', '').strip()
+        alt, caption = '', ''
+        for k, v in attrs.items():
+            if isinstance(v, (dict,)):
+                urls = [url for image, url in v.items() if url.strip()]
+            if 'alt' in k:
+                alt = v.strip()
+            if 'caption' in k:
+                caption = v.strip()
+        image_url, fallback_url = urls
+        image_src = f'<img src="{fallback_url}"/>'
+        if alt:
+            image_src = f'<img src="{fallback_url}" alt ={alt}/>'
+        html = f'<picture><source srcset="{image_url}"type="image"/><source srcset="{fallback_url}" type="image"/>{image_src}</picture>'  # noqa: E501
         if caption:
-            tag = special_attrs_map['caption']
-            html += f"<{tag}>{e(caption)}</{tag}>"
+            html = html + f'<figcaption>{e(caption)}</figcaption>'
         return html
 
 

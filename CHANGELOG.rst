@@ -3,7 +3,8 @@ History
 =======
 0.7.1 (2020-07-06)
 ------------------
-* Standardized anchor tag for known and unkown providers 
+* Standardized anchor tag for known and unkown providers
+* Updated `Image` and `FeatureImage` to support updated image JSON structure.
 
 0.7.0 (2020-07-06)
 ------------------
