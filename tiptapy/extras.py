@@ -6,10 +6,12 @@ class FeaturedImage(BaseNode):
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
-        src = attrs.get("src", {})
-        return bool(
-            src.get('image', '').strip() and src.get('fallback', '').strip()
-        )
+        src = attrs.get("src", "")
+        if src:
+            src = bool(
+                src.get('image', '').strip() and src.get('fallback', '').strip()
+            )
+        return src
 
     def inner_render(self, node) -> str:
         alt, caption = '', ''
