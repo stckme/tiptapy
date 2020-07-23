@@ -1,12 +1,14 @@
 =======
 History
 =======
-0.7.1 (2020-07-06)
+0.7.5 (2020-07-06)
 ------------------
 * Standardized anchor tag for known and unkown providers
 * Updated `Image` and `FeatureImage` to support updated image JSON structure.
 * Rendered HTML of `Image` and `FeatureImage` have MIME type of supported image extensions.
 * Added Deepsource as code quality tool.
+* Code simplification
+* HTML fixes
 
 0.7.0 (2020-07-06)
 ------------------
