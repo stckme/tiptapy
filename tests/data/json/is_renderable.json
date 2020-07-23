@@ -4,7 +4,7 @@
     {
       "type": "featuredimage",
       "attrs": {
-        "src": "",
+        "src": { "image": "", "fallback": "" },
         "alt": "",
         "caption": ""
       }

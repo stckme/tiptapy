@@ -4,8 +4,10 @@ from html import escape as e
 from typing import Dict
 from inspect import isclass
 from urllib.parse import urlparse
+from .image import url2mime
 
-__version__ = '0.7.0'
+
+__version__ = '0.7.5'
 
 renderers: Dict = {}
 
@@ -18,6 +20,7 @@ class BaseNode:
     """
     type = "prose-mirror_content-type"
     wrap_tag: str = ""
+    css_class: str = ""
 
     def is_renderable(self, node):
         """
@@ -30,8 +33,9 @@ class BaseNode:
         out = ''
         if self.is_renderable(in_data):
             out = self.inner_render(in_data)
+            css_class_s = f' class="{self.css_class}"' if self.css_class else ''
             if self.wrap_tag:
-                out = f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
+                out = f"<{self.wrap_tag}{css_class_s}>{out}</{self.wrap_tag}>"
         return out
 
     def inner_render(self, node) -> str:
@@ -102,20 +106,25 @@ class Image(BaseNode):
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
-        return bool(attrs.get('src', '').strip())
+        src = attrs.get("src", "")
+        return src and bool(
+            src.get('image', '').strip() or src.get('fallback', '').strip()
+        )
 
     def inner_render(self, node) -> str:
-        special_attrs_map = {'caption': 'figcaption'}
-        attrs = node.get("attrs", {})
-        attrs_s = " ".join(f'{k}="{v}"'
-                           for k, v in attrs.items()
-                           if k not in special_attrs_map and v.strip()
-                           )
-        html = f"<img {attrs_s}>"
+        attrs = node["attrs"]
+        alt = attrs.get('alt', '').strip()
         caption = attrs.get('caption', '').strip()
+        image_url = attrs['src']['image']
+        fallback_url = attrs['src']['fallback']
+        image_type = url2mime(image_url)
+        fallback_type = url2mime(fallback_url)
+        image_src = f'<img src="{fallback_url}"/>'
+        if alt:
+            image_src = f'<img src="{fallback_url}" alt="{e(alt)}"/>'
+        html = f'<picture><source srcset="{image_url}" type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
         if caption:
-            tag = special_attrs_map['caption']
-            html += f"<{tag}>{e(caption)}</{tag}>"
+            html = html + f'<figcaption>{e(caption)}</figcaption>'
         return html
 
 
