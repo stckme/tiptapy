@@ -1,0 +1,8 @@
+{
+  "type": "image",
+  "attrs": {
+    "src": { "image": "https://www.python.org/python-logo.webp", "fallback": "https://www.python.org/python-logo.png" },
+    "alt": "python",
+    "caption": ""
+  }
+}

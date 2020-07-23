@@ -1,4 +1,4 @@
-from . import BaseNode, register_renderer, e
+from . import BaseNode, register_renderer, get_mime_type, e
 
 
 class FeaturedImage(BaseNode):
@@ -22,10 +22,11 @@ class FeaturedImage(BaseNode):
             if 'caption' in k:
                 caption = v.strip()
         image_url, fallback_url = urls
+        image_type, fallback_type = get_mime_type(image_url, fallback_url)
         image_src = f'<img src="{fallback_url}"/>'
         if alt:
             image_src = f'<img src="{fallback_url}" alt ={alt}/>'
-        html = f'<picture><source srcset="{image_url}"type="image"/><source srcset="{fallback_url}" type="image"/>{image_src}</picture>'  # noqa: E501
+        html = f'<picture><source srcset="{image_url}"type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
         return f'<figure class="featured-image">{html}</figure>'

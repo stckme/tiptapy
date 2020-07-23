@@ -5,6 +5,8 @@ History
 ------------------
 * Standardized anchor tag for known and unkown providers
 * Updated `Image` and `FeatureImage` to support updated image JSON structure.
+* Rendered HTML of `Image` and `FeatureImage` have MIME type of supported image extensions.
+* Added Deepsource as code quality tool.
 
 0.7.0 (2020-07-06)
 ------------------

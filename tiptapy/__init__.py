@@ -4,6 +4,9 @@ from html import escape as e
 from typing import Dict
 from inspect import isclass
 from urllib.parse import urlparse
+from os.path import splitext, basename
+from .image import ALLOWED_IMAGE_FORMATS
+
 
 __version__ = '0.7.0'
 
@@ -118,10 +121,11 @@ class Image(BaseNode):
             if 'caption' in k:
                 caption = v.strip()
         image_url, fallback_url = urls
+        image_type, fallback_type = get_mime_type(image_url, fallback_url)
         image_src = f'<img src="{fallback_url}"/>'
         if alt:
             image_src = f'<img src="{fallback_url}" alt ={alt}/>'
-        html = f'<picture><source srcset="{image_url}"type="image"/><source srcset="{fallback_url}" type="image"/>{image_src}</picture>'  # noqa: E501
+        html = f'<picture><source srcset="{image_url}"type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
         return html
@@ -212,6 +216,21 @@ def is_trusted_link(url):
     # Getting the domain of the link
     link = link.netloc
     return link.endswith(config.DOMAIN)
+
+
+def get_mime_type(image_url, fallback_url):
+    """
+    Return the MIME type from the image URL
+    """
+    image_disassembled = urlparse(image_url)
+    fallback_disassembled = urlparse(fallback_url)
+    # Returns a tuple of filname and extension.
+    image_ext = splitext(basename(image_disassembled.path))[1]
+    fallback_image_ext = splitext(basename(fallback_disassembled.path))[1]
+    image_type = ALLOWED_IMAGE_FORMATS.get(image_ext.upper(), 'image')
+    fallback_type = ALLOWED_IMAGE_FORMATS.get(
+        fallback_image_ext.upper(), 'image')
+    return image_type, fallback_type
 
 
 def to_html(s):
