@@ -4,8 +4,7 @@ from html import escape as e
 from typing import Dict
 from inspect import isclass
 from urllib.parse import urlparse
-from os.path import splitext, basename
-from .image import ALLOWED_IMAGE_FORMATS
+from .image import url2mime
 
 
 __version__ = '0.7.0'
@@ -21,6 +20,7 @@ class BaseNode:
     """
     type = "prose-mirror_content-type"
     wrap_tag: str = ""
+    css_class: str = ""
 
     def is_renderable(self, node):
         """
@@ -33,8 +33,9 @@ class BaseNode:
         out = ''
         if self.is_renderable(in_data):
             out = self.inner_render(in_data)
+            css_class_s = f' class="{self.css_class}"' if self.css_class else ''
             if self.wrap_tag:
-                out = f"<{self.wrap_tag}>{out}</{self.wrap_tag}>"
+                out = f"<{self.wrap_tag}{css_class_s}>{out}</{self.wrap_tag}>"
         return out
 
     def inner_render(self, node) -> str:
@@ -107,25 +108,21 @@ class Image(BaseNode):
         attrs = node.get("attrs", {})
         src = attrs.get("src", "")
         return src and bool(
-            src.get('image', '').strip() and src.get('fallback', '').strip()
+            src.get('image', '').strip() or src.get('fallback', '').strip()
         )
 
     def inner_render(self, node) -> str:
-        attrs = node.get("attrs", {})
-        alt, caption = '', ''
-        for k, v in attrs.items():
-            if isinstance(v, (dict,)):
-                urls = [url for image, url in v.items() if url.strip()]
-            if 'alt' in k:
-                alt = v.strip()
-            if 'caption' in k:
-                caption = v.strip()
-        image_url, fallback_url = urls
-        image_type, fallback_type = get_mime_type(image_url, fallback_url)
+        attrs = node["attrs"]
+        alt = attrs.get('alt', '').strip()
+        caption = attrs.get('caption', '').strip()
+        image_url = attrs['src']['image']
+        fallback_url = attrs['src']['fallback']
+        image_type = url2mime(image_url)
+        fallback_type = url2mime(fallback_url)
         image_src = f'<img src="{fallback_url}"/>'
         if alt:
-            image_src = f'<img src="{fallback_url}" alt ={alt}/>'
-        html = f'<picture><source srcset="{image_url}"type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
+            image_src = f'<img src="{fallback_url}" alt="{e(alt)}"/>'
+        html = f'<picture><source srcset="{image_url}" type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
         return html
@@ -216,21 +213,6 @@ def is_trusted_link(url):
     # Getting the domain of the link
     link = link.netloc
     return link.endswith(config.DOMAIN)
-
-
-def get_mime_type(image_url, fallback_url):
-    """
-    Return the MIME type from the image URL
-    """
-    image_disassembled = urlparse(image_url)
-    fallback_disassembled = urlparse(fallback_url)
-    # Returns a tuple of filname and extension.
-    image_ext = splitext(basename(image_disassembled.path))[1]
-    fallback_image_ext = splitext(basename(fallback_disassembled.path))[1]
-    image_type = ALLOWED_IMAGE_FORMATS.get(image_ext.upper(), 'image')
-    fallback_type = ALLOWED_IMAGE_FORMATS.get(
-        fallback_image_ext.upper(), 'image')
-    return image_type, fallback_type
 
 
 def to_html(s):
