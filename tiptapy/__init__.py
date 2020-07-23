@@ -103,12 +103,9 @@ class Image(BaseNode):
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
         src = attrs.get("src", "")
-        if src:    
-            src =bool(
-                src.get('image', '').strip() and src.get('fallback', '').strip()
-            )
-        return src
-
+        return src and bool(
+            src.get('image', '').strip() and src.get('fallback', '').strip()
+        )
 
     def inner_render(self, node) -> str:
         attrs = node.get("attrs", {})
