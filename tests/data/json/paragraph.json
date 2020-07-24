@@ -1,0 +1,28 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "sup"
+            }
+          ],
+          "text": "Quick brown fox jumps over the lazy dog. "
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "In Penny Lane, there is a barber showing photographs.."
+        }
+      ]
+    }
+  ]
+}

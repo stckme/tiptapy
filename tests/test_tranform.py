@@ -1,7 +1,6 @@
 import os
 import pytest
 import tiptapy
-import json
 from tiptapy import extras
 
 
@@ -11,6 +10,7 @@ tags_to_test = (
     "bulletlist",
     "mark_tags",
     "ordered_list",
+    "paragraph",
     "image",
     "image-missing_caption",
     "image-no_caption",

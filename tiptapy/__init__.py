@@ -67,7 +67,7 @@ class config:
 
 class Text(BaseNode):
     type = "text"
-    mark_tags = {"bold": "strong", "italic": "em", "link": "a"}
+    mark_tags = {"bold": "strong", "italic": "em", "link": "a", "sup": "sup"}
 
     def inner_render(self, node):
         text = e(node["text"])
@@ -82,7 +82,9 @@ class Text(BaseNode):
                         if not is_trusted_link(url):
                             attrs["target"] = "_blank"
                             attrs["rel"] = "noopener nofollow"
-                    attrs_s = " ".join(f'{k}="{e(v)}"' for k, v in attrs.items())
+                    attrs_s = " ".join(
+                        f'{k}="{e(v)}"' for k, v in attrs.items()
+                    )
                     text = f"<{tag} {attrs_s}>{text}</{tag}>"
                 else:
                     text = f"<{tag}>{text}</{tag}>"
@@ -150,6 +152,18 @@ class Title(BaseContainer):
 class Paragraph(BaseContainer):
     type = "paragraph"
     wrap_tag: str = "p"
+
+    def is_renderable(self, node):
+        text = ''
+        content = node.get('content', [])
+        if content:
+            text = content[0].get('text', '')
+        return bool(text)
+
+    def inner_render(self, node) -> str:
+        content = node.get('content', [])
+        data = content[0]
+        return super().inner_render(node)
 
 
 class BlockQuote(BaseContainer):
