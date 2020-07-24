@@ -160,11 +160,6 @@ class Paragraph(BaseContainer):
             text = content[0].get('text', '')
         return bool(text)
 
-    def inner_render(self, node) -> str:
-        content = node.get('content', [])
-        data = content[0]
-        return super().inner_render(node)
-
 
 class BlockQuote(BaseContainer):
     type = "blockquote"
