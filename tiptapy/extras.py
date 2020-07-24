@@ -1,4 +1,4 @@
-from . import Image, register_renderer, e
+from . import Image, register_renderer
 
 
 class FeaturedImage(Image):

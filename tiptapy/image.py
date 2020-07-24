@@ -8,6 +8,7 @@ class SupportedFormatsMapper(dict):
     def __missing__(self, ext):
         return 'image'
 
+
 SUPPORTED_FORMATS_MAP = SupportedFormatsMapper(
     PNG='image/png',
     JPG='image/jpeg',
@@ -17,6 +18,7 @@ SUPPORTED_FORMATS_MAP = SupportedFormatsMapper(
     WEBP='image/webp',
     SVG='image/svg+xml'
 )
+
 
 def url2mime(url):
     ext = splitext(url)[-1]
