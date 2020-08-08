@@ -1,0 +1,53 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "text": "Soft Kitty is a popular song, popularized by the characters Sheldon and Penny in the American sitcom The Big Bang Theory, and which elsewhere may be rendered as Warm Kitty.",
+          "type": "text"
+        },
+        {
+          "type": "hard_break"
+        },
+        {
+          "type": "hard_break"
+        },
+        {
+          "text": "Versions of the song have been released by Patsy Biscoe.",
+          "type": "text"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "hard_break"
+        }   
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "hard_break"
+        },
+        {
+          "text": "Buzzinga",
+          "type": "text",
+          "marks": [
+            {
+              "type": "bold"
+            }
+          ]
+        },
+        {
+          "text": "Bazinga, is a word used by Sheldon Cooper to signal that what he said immediately before this utterance was to be taken as a joke. In later seasons, it becomes something of a catchphrase.",
+          "type": "text"
+        }
+      ]
+    }   
+  ]
+}

@@ -11,6 +11,7 @@ tags_to_test = (
     "mark_tags",
     "ordered_list",
     "paragraph",
+    "paragraph-is_renderable",
     "image",
     "image-missing_caption",
     "image-no_caption",
