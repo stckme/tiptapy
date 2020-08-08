@@ -25,6 +25,7 @@ tags_to_test = (
     "embed-no_caption",
     "heading",
     "is_renderable",
+    "lock",
 )
 
 

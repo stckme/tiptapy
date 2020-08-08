@@ -1,0 +1,29 @@
+{
+  "title": "",
+  "type": "doc",
+  "content": [
+    {
+      "type": "featuredimage",
+      "attrs": {
+        "src": { "image": "https://www.python.org/python-logo.webp", "fallback": "https://www.python.org/python-logo.png" },
+        "alt": "Python",
+        "caption": ""
+      }
+    },
+    {
+      "type": "lock"
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "With Python3 you can fly it is as simple as Import AntiGravity."
+        },
+        {
+          "type": "hard_break"
+        }
+      ]
+    }
+  ]
+}
