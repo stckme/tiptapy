@@ -1,6 +1,10 @@
 =======
 History
 =======
+0.7.7 (2020-08-10)
+------------------
+* Paragraph rendering fix
+
 0.7.6 (2020-07-24)
 ------------------
 * Support for superscript
