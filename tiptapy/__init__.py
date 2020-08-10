@@ -154,11 +154,7 @@ class Paragraph(BaseContainer):
     wrap_tag: str = "p"
 
     def is_renderable(self, node):
-        text = ''
-        content = node.get('content', [])
-        if content:
-            text = content[0].get('text', '')
-        return bool(text)
+        return bool(node.get('content'))
 
 
 class BlockQuote(BaseContainer):
