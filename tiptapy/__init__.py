@@ -121,9 +121,9 @@ class Image(BaseNode):
         fallback_url = attrs['src']['fallback']
         image_type = url2mime(image_url)
         fallback_type = url2mime(fallback_url)
-        image_src = f'<img src="{fallback_url}"/>'
+        image_src = f'<img src="{fallback_url} loading="lazy""/>'
         if alt:
-            image_src = f'<img src="{fallback_url}" alt="{e(alt)}"/>'
+            image_src = f'<img src="{fallback_url}" loading="lazy" alt="{e(alt)}"/>'
         html = f'<picture><source srcset="{image_url}" type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
