@@ -117,14 +117,18 @@ class Image(BaseNode):
         attrs = node["attrs"]
         alt = attrs.get('alt', '').strip()
         caption = attrs.get('caption', '').strip()
+        height = attrs.get('height', '')
+        width = attrs.get('width', '')
         image_url = attrs['src']['image']
         fallback_url = attrs['src']['fallback']
         image_type = url2mime(image_url)
         fallback_type = url2mime(fallback_url)
-        image_src = f'<img src="{fallback_url}"/>'
+        image_src = f'img src="{fallback_url}"'
         if alt:
-            image_src = f'<img src="{fallback_url}" alt="{e(alt)}"/>'
-        html = f'<picture><source srcset="{image_url}" type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/>{image_src}</picture>'  # noqa: E501
+            image_src += f' alt="{e(alt)}"'
+        if height and width:
+            image_src += f'width="{width}" height="{height}"'
+        html = f'<picture><source srcset="{image_url}" type="{image_type}"/><source srcset="{fallback_url}" type="{fallback_type}"/><{image_src}/></picture>'  # noqa: E501
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
         return html
