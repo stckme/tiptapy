@@ -1,0 +1,13 @@
+{
+  "title": "Audio Block",
+  "type": "doc",
+  "content": [
+    {
+      "type": "audio",
+      "attrs": {
+        "src": "https://getfoobar/audio/sohtdbcmxu-1581683086.mp3",
+        "caption": "YetAnotherPodcaster"
+      }
+    }
+  ]
+}
