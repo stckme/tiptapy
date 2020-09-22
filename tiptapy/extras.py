@@ -1,4 +1,3 @@
-import re
 from . import BaseNode, Image, register_renderer, e
 
 
@@ -19,12 +18,10 @@ class StackAudio(BaseNode):
         attrs = node["attrs"]
         src = attrs.get('src', '').strip()
         caption = attrs.get('caption', '').strip()
-        audio_link = f'<audio src={src}></audio>'
+        audio_src_block = f'<audio src={src}></audio>'
         with open('tiptapy/templates/stack-audio-player.html', 'r') as f:
-            data = f.read()
-        # Removing whitespaces between html tags.
-        audio_player_block = re.sub(r'\s\s+', '', data)
-        html = f'<div>{audio_link}{audio_player_block}</div>'
+            audio_player_block = f.read()
+        html = f'<div>{audio_src_block}{audio_player_block}</div>'
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
         return html
