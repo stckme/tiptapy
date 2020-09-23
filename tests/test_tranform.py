@@ -26,6 +26,8 @@ tags_to_test = (
     "embed-no_caption",
     "heading",
     "is_renderable",
+    "audio",
+    "audio-no_caption",
 )
 
 
