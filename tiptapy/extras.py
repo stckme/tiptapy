@@ -8,7 +8,6 @@ class FeaturedImage(Image):
 
 class StackAudio(BaseNode):
     type = "audio"
-    wrap_tag = "figure"
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
@@ -24,7 +23,7 @@ class StackAudio(BaseNode):
         html = f'<div>{audio_src_block}{audio_player_block}</div>'
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
-        return html
+        return f'<figure class="audio-player-container">{html}</figure>'
 
 
 register_renderer(FeaturedImage)
