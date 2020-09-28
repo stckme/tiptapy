@@ -1,6 +1,10 @@
 =======
 History
 =======
+0.8.0 (2020-09-23)
+------------------
+* Audio block support
+
 0.7.7 (2020-08-10)
 ------------------
 * Paragraph rendering fix
