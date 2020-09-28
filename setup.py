@@ -13,8 +13,7 @@ setup(
     author="Shekhar Tiwatne",
     author_email="pythonic@gmail.com",
     license="http://www.opensource.org/licenses/mit-license.php",
-    include_package_data=True,
-    package_data={'': ['templates/stack-audio-player.html']},
+    package_data={'tiptapy': ['templates/stack-audio-player.html']},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

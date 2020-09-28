@@ -1,4 +1,4 @@
-import pkg_resources
+import pkgutil
 from . import BaseNode, Image, register_renderer, e
 
 
@@ -19,9 +19,9 @@ class StackAudio(BaseNode):
         src = attrs.get('src', '').strip()
         caption = attrs.get('caption', '').strip()
         audio_src_block = f'<audio src={src}></audio>'
-        audio_player_block = pkg_resources.resource_stream(
+        audio_player_block = pkgutil.get_data(
             __name__, 'templates/stack-audio-player.html'
-        ).read().decode()
+        ).decode()
         html = f'<div>{audio_src_block}{audio_player_block}</div>'
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
