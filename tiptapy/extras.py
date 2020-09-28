@@ -1,3 +1,4 @@
+import pkg_resources
 from . import BaseNode, Image, register_renderer, e
 
 
@@ -18,8 +19,9 @@ class StackAudio(BaseNode):
         src = attrs.get('src', '').strip()
         caption = attrs.get('caption', '').strip()
         audio_src_block = f'<audio src={src}></audio>'
-        with open('tiptapy/templates/stack-audio-player.html', 'r') as f:
-            audio_player_block = f.read()
+        audio_player_block = pkg_resources.resource_stream(
+            __name__, 'templates/stack-audio-player.html'
+        ).read().decode()
         html = f'<div>{audio_src_block}{audio_player_block}</div>'
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
