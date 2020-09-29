@@ -1,3 +1,4 @@
+import pkgutil
 from . import BaseNode, Image, register_renderer, e
 
 
@@ -8,7 +9,6 @@ class FeaturedImage(Image):
 
 class StackAudio(BaseNode):
     type = "audio"
-    wrap_tag = "figure"
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
@@ -19,12 +19,13 @@ class StackAudio(BaseNode):
         src = attrs.get('src', '').strip()
         caption = attrs.get('caption', '').strip()
         audio_src_block = f'<audio src={src}></audio>'
-        with open('tiptapy/templates/stack-audio-player.html', 'r') as f:
-            audio_player_block = f.read()
+        audio_player_block = pkgutil.get_data(
+            __name__, 'templates/stack-audio-player.html'
+        ).decode()
         html = f'<div>{audio_src_block}{audio_player_block}</div>'
         if caption:
             html = html + f'<figcaption>{e(caption)}</figcaption>'
-        return html
+        return f'<figure class="audio-player-container">{html}</figure>'
 
 
 register_renderer(FeaturedImage)
