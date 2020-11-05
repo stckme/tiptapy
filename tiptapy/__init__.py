@@ -144,6 +144,29 @@ class Embed(BaseContainer):
         return f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
 
 
+class CodeBlock(BaseContainer):
+    type = "code_block"
+    wrap_tag = "pre"
+
+    def is_renderable(self, node):
+        renderable = False
+        content = node.get("content", [])
+        if content:
+            text = content[0]
+            renderable = bool(text.get("text", ""))
+        return renderable
+
+    def inner_render(self, node):
+        attrs = node.get("attrs", {})
+        language = attrs.get("language", "")
+        content = node.get("content", {})[0]
+        text = content.get("text", "")
+        html = ""
+        if language:
+            html = f'<div class="highlight"><pre data-lang="{language}">{text}</pre></div>' # noqa: E501
+        return html
+
+
 class Title(BaseContainer):
     type = "title"
     wrap_tag: str = "h1"
