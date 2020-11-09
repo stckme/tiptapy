@@ -6,6 +6,9 @@ from inspect import isclass
 from urllib.parse import urlparse
 from .image import url2mime
 
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
 
 __version__ = '0.8.1'
 
@@ -143,6 +146,19 @@ class Embed(BaseContainer):
         provider_name = attrs.get('provider') or 'link'
         return f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
 
+class CodeBlock(BaseNode):
+    type = "code_block"
+
+    def inner_render(self, node):
+        attrs = node.get("attrs", {})
+        language = attrs.get("language", "")
+        content = node.get("content", {})[0]
+        text = content.get("text", "")
+        if language:
+            lexer = get_lexer_by_name(language, stripall=True)
+            formatter = HtmlFormatter()
+            html = highlight(text, lexer, formatter)
+        return f'{html}'
 
 class Title(BaseContainer):
     type = "title"
