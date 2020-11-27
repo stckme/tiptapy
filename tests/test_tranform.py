@@ -27,6 +27,8 @@ tags_to_test = (
     "heading",
     "is_renderable",
     "code_block",
+    "audio",
+    "audio-no_caption",
 )
 
 
