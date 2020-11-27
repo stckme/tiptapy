@@ -144,9 +144,8 @@ class Embed(BaseContainer):
         return f'<div class="embed-wrapper {provider_name.lower()}-wrapper"><figure>{html}</figure></div>'  # noqa: E501
 
 
-class CodeBlock(BaseContainer):
+class CodeBlock(BaseNode):
     type = "code_block"
-    wrap_tag = "pre"
 
     def is_renderable(self, node):
         renderable = False
