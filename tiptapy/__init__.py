@@ -159,7 +159,7 @@ class CodeBlock(BaseNode):
         attrs = node.get("attrs", {})
         language = attrs.get("language", "")
         content = node.get("content", {})[0]
-        text = content.get("text", "")
+        text = e(content.get("text", ""))
         html = ""
         if language:
             html = f'<div class="highlight"><pre data-lang="{language}">{text}</pre></div>' # noqa: E501
