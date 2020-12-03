@@ -162,7 +162,9 @@ class CodeBlock(BaseNode):
         text = e(content.get("text", ""))
         html = ""
         if language:
-            html = f'<div class="hljs"><pre data-lang="{language}">{text}</pre></div>' # noqa: E501
+            html = f'<div><pre><code data-lang="{language}">{text}</code></pre></div>' # noqa: E501
+        else:
+            html = f'<div><pre><code>{text}</code></pre></div>' # noqa: E501
         return html
 
 
