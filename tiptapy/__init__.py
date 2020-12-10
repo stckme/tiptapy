@@ -67,7 +67,8 @@ class config:
 
 class Text(BaseNode):
     type = "text"
-    mark_tags = {"bold": "strong", "italic": "em", "link": "a", "sup": "sup"}
+    mark_tags = {"bold": "strong", "italic": "em",
+                 "link": "a", "sup": "sup", "code": "code"}
 
     def inner_render(self, node):
         text = e(node["text"])
@@ -162,9 +163,9 @@ class CodeBlock(BaseNode):
         text = e(content.get("text", ""))
         html = ""
         if language:
-            html = f'<div><pre><code data-lang="{language}">{text}</code></pre></div>' # noqa: E501
+            html = f'<div><pre><code data-lang="{language}">{text}</code></pre></div>'  # noqa: E501
         else:
-            html = f'<div><pre><code>{text}</code></pre></div>' # noqa: E501
+            html = f'<div><pre><code>{text}</code></pre></div>'  # noqa: E501
         return html
 
 
