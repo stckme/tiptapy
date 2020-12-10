@@ -160,11 +160,9 @@ class CodeBlock(BaseNode):
         language = attrs.get("language", "")
         content = node.get("content", {})[0]
         text = e(content.get("text", ""))
-        html = ""
+        html = f'<div><pre><code>{text}</code></pre></div>'
         if language:
             html = f'<div><pre><code data-lang="{language}">{text}</code></pre></div>' # noqa: E501
-        else:
-            html = f'<div><pre><code>{text}</code></pre></div>' # noqa: E501
         return html
 
 
