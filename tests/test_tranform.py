@@ -12,6 +12,7 @@ tags_to_test = (
     "ordered_list",
     "paragraph",
     "paragraph-is_renderable",
+    "paragraph-codemark",
     "image",
     "image-missing_caption",
     "image-no_caption",
