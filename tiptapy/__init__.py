@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 from .image import url2mime
 
 
-__version__ = '0.9.1'
+__version__ = '0.9.2'
 
 renderers: Dict = {}
 
@@ -67,7 +67,8 @@ class config:
 
 class Text(BaseNode):
     type = "text"
-    mark_tags = {"bold": "strong", "italic": "em", "link": "a", "sup": "sup"}
+    mark_tags = {"bold": "strong", "italic": "em",
+                 "link": "a", "sup": "sup", "code": "code"}
 
     def inner_render(self, node):
         text = e(node["text"])
