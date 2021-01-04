@@ -34,9 +34,8 @@ class StackDocument(BaseNode):
 
     def is_renderable(self, node):
         attrs = node.get("attrs", {})
-        return bool(
-            attrs.get("src", "") and attrs.get("format", "") and attrs.get("name", "") and attrs.get("size", "")   # noqa: E501
-        )
+        reqd_attrs = {'src', 'format', 'name', 'size'}
+        return set(attrs).issuperset(reqd_attrs)
 
     def inner_render(self, node):
         attrs = node["attrs"]
