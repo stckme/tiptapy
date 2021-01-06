@@ -1,0 +1,25 @@
+{
+  "title": "",
+  "type": "doc",
+  "content": [
+    {
+      "type": "document",
+      "attrs": {
+        "src": "http://www.africau.edu/images/default/sample.pdf",
+        "caption": "This is pdf caption.",
+        "name": "RE_40566006.pdf",
+        "size": "67.3KB",
+        "format": "pdf"
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Document Test"
+        }
+      ]
+    }
+  ]
+}
