@@ -1,6 +1,10 @@
 =======
 History
 =======
+0.11.0 (2021-05-25)
+-------------------
+* Image width height support
+
 0.10.0 (2021-01-02)
 -------------------
 * Document block support
