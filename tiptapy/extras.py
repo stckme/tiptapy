@@ -43,7 +43,7 @@ class StackDocument(BaseNode):
         caption = attrs.get('caption', '').strip()
         name = e(attrs.get('name', '').strip())
         size = attrs.get('size', '').strip()
-        extension = attrs.get('format', '').strip()
+        extension = attrs.get('format', '').strip()[:4]
         document_block = pkgutil.get_data(
             __name__, 'templates/stack-document.html'
         ).decode()

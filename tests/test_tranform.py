@@ -32,7 +32,8 @@ tags_to_test = (
     "code_block",
     "audio",
     "audio-no_caption",
-    "document-pdf"
+    "document-pdf",
+    "document-sketch"
 )
 
 
