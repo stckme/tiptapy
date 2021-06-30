@@ -1,6 +1,11 @@
 =======
 History
 =======
+
+0.11.1 (2021-06-30)
+-------------------
+* Style changes for Documents
+
 0.11.0 (2021-05-25)
 -------------------
 * Image width height support
@@ -27,7 +32,7 @@ History
 
 0.7.5 (2020-07-24)
 ------------------
-* Standardized anchor tag for known and unkown providers
+* Standardized anchor tag for known and unknown providers
 * Updated `Image` and `FeatureImage` to support updated image JSON structure.
 * Rendered HTML of `Image` and `FeatureImage` have MIME type of supported image extensions.
 * Added Deepsource as code quality tool.
