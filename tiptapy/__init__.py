@@ -221,7 +221,12 @@ class Doc(BaseContainer):
 
 class OrderedList(BaseContainer):
     type = "ordered_list"
-    wrap_tag: str = "ol"
+
+    def inner_render(self, node) -> str:
+        attrs = node['attrs']
+        start = attrs.get('start') or attrs.get('order') or 1
+        inner_html = super().inner_render(node)
+        return f'<ol start="{start}">{inner_html}</ol>'
 
 
 def register_renderer(cls):
