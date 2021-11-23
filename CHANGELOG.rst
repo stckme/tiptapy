@@ -2,6 +2,10 @@
 History
 =======
 
+0.12.0 (2021-11-23)
+-------------------
+* Start attribute added for Ordered List
+
 0.11.1 (2021-06-30)
 -------------------
 * Style changes for Documents

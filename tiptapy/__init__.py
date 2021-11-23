@@ -7,7 +7,7 @@ from urllib.parse import urlparse
 from .image import url2mime
 
 
-__version__ = '0.11.1'
+__version__ = '0.12.0'
 
 renderers: Dict = {}
 
