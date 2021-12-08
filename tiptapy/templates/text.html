@@ -1,1 +1,25 @@
-{{ node.text }}
+{%- macro render_strong(text) -%}
+<strong>{{ text }}</strong>
+{%- endmacro -%}
+
+{%- macro render_sup(text) -%}
+<sup>{{ text }}</sup>
+{%- endmacro -%}
+
+{%- macro render_em(text) -%}
+<em>{{ text }}</em>
+{%- endmacro -%}
+
+{%- for mark in node.marks -%}
+  {%- if mark.type == "bold" -%}
+    {{ render_strong(node.text)}}
+  {%- elif mark == "sup" -%}
+    {{ render_sup(node.text)}}
+  {%- elif mark.type == "italic" -%}
+    {{ render_em(node.text)}}
+  {%- elif mark == "" -%}
+    {{ node.text }}
+  {%- endif -%}
+{%- else -%}
+  {{ node.text }}
+{%- endfor -%}
