@@ -1,0 +1,11 @@
+{%- if node.attrs.start -%}
+<ol start="{{ node.attrs.start }}">
+{%- else -%}
+<ol start="{{ node.attrs.order|default(1) }}">
+{%- endif -%}
+{%- for item in node.content -%}
+  {%- with template=item.type + '.html', node=item -%} 
+      {%- include template -%}
+        {%- endwith -%}
+	{%- endfor -%}
+</ol>
