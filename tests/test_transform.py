@@ -6,8 +6,8 @@ import tiptapy
 
 tags_to_test = (
    "simple",
-#    "blockquote",
-#    "bulletlist",
+    "blockquote",
+    "bulletlist",
 #    "mark_tags",
     "ordered_list",
 #    "paragraph",
