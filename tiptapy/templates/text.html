@@ -13,7 +13,7 @@
 {%- for mark in node.marks -%}
   {%- if mark.type == "bold" -%}
     {{ render_strong(node.text)}}
-  {%- elif mark == "sup" -%}
+  {%- elif mark.type == "sup" -%}
     {{ render_sup(node.text)}}
   {%- elif mark.type == "italic" -%}
     {{ render_em(node.text)}}
