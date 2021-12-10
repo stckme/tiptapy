@@ -1,5 +1,5 @@
 import json
-from html import escape as e
+from html import escape
 from inspect import isclass
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 from typing import Dict
@@ -19,7 +19,7 @@ def make_img_src(attrs):
     fallback_url = attrs['src']['fallback']
     image_src = f'img src="{fallback_url}"'
     if alt:
-        image_src += f' alt="{e(alt)}"'
+        image_src += f' alt="{escape(alt)}"'
     if height and width:
         image_src += f'width="{width}" height="{height}"'
 
@@ -34,7 +34,7 @@ def handle_links(attrs):
            attrs["target"] = "_blank"
            attrs["rel"] = "noopener nofollow"
         retval = " ".join(
-            f'{k}="{e(v)}"' for k, v in attrs.items()
+            f'{k}="{escape(v)}"' for k, v in attrs.items()
         )
 
     return retval
@@ -50,6 +50,8 @@ def init_env(path='tiptapy/templates/'):
     env.globals['url2mime'] = url2mime
     env.globals['make_img_src'] = make_img_src
     env.globals['handle_links'] = handle_links
+    # Cause jinja2 `e` filter is not exactly same as html.escape
+    env.globals['escape'] = escape
 
     return env
 

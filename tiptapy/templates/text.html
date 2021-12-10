@@ -10,6 +10,10 @@
 <em>{{ text }}</em>
 {%- endmacro -%}
 
+{%- macro render_code(text) -%}
+<code>{{ text }}</code>
+{%- endmacro -%}
+
 {%- macro render_link(attrs, text) -%}
 {%- set attr_s = handle_links(attrs) -%}
 {%- if attr_s -%}
@@ -26,6 +30,8 @@
     {{ render_sup(node.text)}}
   {%- elif mark.type == "italic" -%}
     {{ render_em(node.text)}}
+  {%- elif mark.type == "code" -%}
+    {{ render_code(node.text)}}
   {%- elif mark.type == "link" -%}
     {{ render_link(mark.attrs, node.text)}}
   {%- elif mark == "" -%}

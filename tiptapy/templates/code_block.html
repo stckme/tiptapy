@@ -1,0 +1,9 @@
+<div><pre>
+{%- set language = node.attrs.language|default("") -%}
+{%- set text = escape(node.content[0].text) -%}
+{%- if language -%}
+<code data-lang="{{language}}">{{text}}</code>
+{%- else -%}
+<code>{{text}}</code>
+{%- endif -%}
+</pre></div>
