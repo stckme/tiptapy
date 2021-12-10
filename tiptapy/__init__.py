@@ -1,8 +1,10 @@
 import json
+from html import escape as e
 from inspect import isclass
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 from typing import Dict
 from urllib.parse import urlparse
+from .image import url2mime
 
 
 __version__ = '0.12.0'
@@ -10,11 +12,31 @@ __version__ = '0.12.0'
 renderers: Dict = {}
 
 
+def make_img_src(attrs):
+    alt = attrs.get('alt', '').strip()
+    height = attrs.get('height', '')
+    width = attrs.get('width', '')
+    fallback_url = attrs['src']['fallback']
+    image_src = f'img src="{fallback_url}"'
+    if alt:
+        image_src += f' alt="{e(alt)}"'
+    if height and width:
+        image_src += f'width="{width}" height="{height}"'
+
+    return image_src
+
+
 def init_env(path='tiptapy/templates/'):
-    return Environment(loader=FileSystemLoader(path),
+    env = Environment(loader=FileSystemLoader(path),
                        autoescape=select_autoescape(
                            enabled_extensions=('jinja2'))
                        )
+    # https://stackoverflow.com/a/6038550
+    env.globals['url2mime'] = url2mime
+    env.globals['make_img_src'] = make_img_src
+
+    return env
+
 
 
 class BaseDoc:
@@ -30,6 +52,19 @@ class BaseDoc:
     def render(self, in_data):
         node = in_data if isinstance(in_data, dict) else json.loads(in_data)
         return self.t.render(node=node)
+
+
+class Image(BaseDoc):
+
+    node_type = 'image'
+
+    # Discussed with Pradhvan and decided to keep it here in python
+    def is_renderable(self, node):
+        attrs = node.get("attrs", {})
+        src = attrs.get("src", "")
+        return src and bool(
+            src.get('image', '').strip() or src.get('fallback', '').strip()
+        )
 
 
 class config:
