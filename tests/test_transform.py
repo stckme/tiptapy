@@ -8,7 +8,7 @@ tags_to_test = (
    "simple",
     "blockquote",
     "bulletlist",
-#    "mark_tags",
+    "mark_tags",
     "ordered_list",
     "paragraph",
     "paragraph-is_renderable",

@@ -26,6 +26,21 @@ def make_img_src(attrs):
     return image_src
 
 
+def handle_links(attrs):
+    retval = None
+    if attrs:
+        url = attrs.get("href") or ""
+        if not is_trusted_link(url):
+           attrs["target"] = "_blank"
+           attrs["rel"] = "noopener nofollow"
+        retval = " ".join(
+            f'{k}="{e(v)}"' for k, v in attrs.items()
+        )
+
+    return retval
+
+
+
 def init_env(path='tiptapy/templates/'):
     env = Environment(loader=FileSystemLoader(path),
                        autoescape=select_autoescape(
@@ -34,6 +49,7 @@ def init_env(path='tiptapy/templates/'):
     # https://stackoverflow.com/a/6038550
     env.globals['url2mime'] = url2mime
     env.globals['make_img_src'] = make_img_src
+    env.globals['handle_links'] = handle_links
 
     return env
 
