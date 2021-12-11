@@ -43,9 +43,7 @@ def handle_links(attrs):
 
 def init_env(path='tiptapy/templates/'):
     env = Environment(loader=FileSystemLoader(path),
-                       autoescape=select_autoescape(
-                           enabled_extensions=('jinja2'))
-                       )
+                      autoescape=select_autoescape(enabled_extensions=('html')))
     # https://stackoverflow.com/a/6038550
     env.globals['url2mime'] = url2mime
     env.globals['make_img_src'] = make_img_src
@@ -83,6 +81,12 @@ class Image(BaseDoc):
         return src and bool(
             src.get('image', '').strip() or src.get('fallback', '').strip()
         )
+
+
+class Embed(BaseDoc):
+
+    node_type = 'embed'
+
 
 
 class config:
