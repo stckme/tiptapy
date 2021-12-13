@@ -1,7 +1,7 @@
 import os
 import pytest
 import tiptapy
-# from tiptapy import extras
+from tiptapy import extras
 
 
 tags_to_test = (
@@ -18,11 +18,11 @@ tags_to_test = (
     "image-no_caption",
     "image-mime_type",
     "image-height_width",
-#    "featuredimage",
-#    "featuredimage-missing_caption",
-#    "featuredimage-no_caption",
-#    "featuredimage-mime_type",
-#    "featuredimage-height_width",
+    "featuredimage",
+    "featuredimage-missing_caption",
+    "featuredimage-no_caption",
+    "featuredimage-mime_type",
+    "featuredimage-height_width",
     "horizontal_rule",
     "embed",
     "embed-missing_caption",

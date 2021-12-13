@@ -40,8 +40,7 @@ def handle_links(attrs):
     return retval
 
 
-
-def init_env(path='tiptapy/templates/'):
+def init_env(path):
     env = Environment(loader=FileSystemLoader(path),
                       autoescape=select_autoescape(enabled_extensions=('html')))
     # https://stackoverflow.com/a/6038550
@@ -54,14 +53,13 @@ def init_env(path='tiptapy/templates/'):
     return env
 
 
-
 class BaseDoc:
 
     node_type = 'doc'
-    templates_path = 'base-templates-dir'
+    templates_path = 'tiptapy/templates/'
 
     def __init__(self):
-        templates = init_env()
+        templates = init_env(self.templates_path)
         self.t = templates.get_template(f'{self.node_type}.html')
 
 
