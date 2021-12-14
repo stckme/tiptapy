@@ -7,8 +7,10 @@
 {%- set fallback_url = node.attrs['src']['fallback'] -%}
 {%- set fallback_type = url2mime(fallback_url) -%}
 
-<figure class="featured-image"><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
-{%- if caption -%}
-<figcaption>{{ caption }}</figcaption>
+{%- if image_url or fallback_url -%}
+  <figure class="featured-image"><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
+  {%- if caption -%}
+    <figcaption>{{ caption }}</figcaption>
+  {%- endif -%}
+  </figure>
 {%- endif -%}
-</figure>
