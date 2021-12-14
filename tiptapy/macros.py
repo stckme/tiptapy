@@ -2,23 +2,6 @@ from html import escape
 from urllib.parse import urlparse
 
 
-class config:
-    """
-    Config class to store constans which are used by the othe nodes.
-    """
-    DOMAIN = "python.org"
-
-
-def is_trusted_link(url):
-    """
-    Check if the domain is the same as in the config.
-    """
-    link = urlparse(url)
-    # Getting the domain of the link
-    link = link.netloc
-    return link.endswith(config.DOMAIN)
-
-
 def make_img_src(attrs):
     alt = attrs.get('alt', '').strip()
     height = attrs.get('height', '')
@@ -33,15 +16,20 @@ def make_img_src(attrs):
     return image_src
 
 
-def handle_links(attrs):
-    retval = None
-    if attrs:
-        url = attrs.get("href") or ""
-        if not is_trusted_link(url):
-           attrs["target"] = "_blank"
-           attrs["rel"] = "noopener nofollow"
-        retval = " ".join(
-            f'{k}="{escape(v)}"' for k, v in attrs.items()
-        )
+def build_link_handler(config):
 
-    return retval
+    def handle_links(attrs):
+
+        retval = None
+        if attrs:
+            url = attrs.get("href") or ""
+            link = urlparse(url)
+            if not link.netloc.endswith(config.DOMAIN):
+                attrs["target"] = "_blank"
+                attrs["rel"] = "noopener nofollow"
+            retval = " ".join(
+                f'{k}="{escape(v)}"' for k, v in attrs.items()
+            )
+        return retval
+
+    return handle_links
