@@ -31,8 +31,8 @@ tags_to_test = (
     "code_block",
     "audio",
     "audio-no_caption",
-#    "document-pdf",
-#    "document-sketch"
+    "document-pdf",
+    "document-sketch"
 )
 
 class config:

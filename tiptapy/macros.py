@@ -1,6 +1,7 @@
 import pkgutil
 from html import escape
 from urllib.parse import urlparse
+from string import Template
 
 
 def make_img_src(attrs):
@@ -40,3 +41,11 @@ def get_audio_player_block():
     audio_player_block = pkgutil.get_data(
         __name__, 'templates/stack-audio-player.html').decode()
     return audio_player_block
+
+
+def get_doc_block(ext, fname, size, src):
+    document_block = pkgutil.get_data(__name__, 'templates/stack-document.html').decode()
+    document = Template(document_block)
+    html = document.substitute(fileformat=ext[:4], filename=fname,
+                               filesize=size, filesrc=src)
+    return html
