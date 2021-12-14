@@ -1,6 +1,12 @@
 import pkgutil
 from string import Template
-from . import BaseDoc, Image, register_renderer
+from . import BaseDoc, Image, register_renderer, init_env
+
+
+def get_audio_player_block():
+    audio_player_block = pkgutil.get_data(
+        __name__, 'templates/stack-audio-player.html').decode()
+    return audio_player_block
 
 
 class FeaturedImage(Image):
@@ -8,25 +14,14 @@ class FeaturedImage(Image):
     templates_path = 'tiptapy/templates/extras'
 
 
-# class StackAudio(BaseNode):
-#     type = "audio"
-#
-#     def is_renderable(self, node):
-#         attrs = node.get("attrs", {})
-#         return bool(attrs.get("src", ""))
-#
-#     def inner_render(self, node):
-#         attrs = node["attrs"]
-#         src = attrs.get('src', '').strip()
-#         caption = attrs.get('caption', '').strip()
-#         audio_src_block = f'<audio src={src}></audio>'
-#         audio_player_block = pkgutil.get_data(
-#             __name__, 'templates/stack-audio-player.html'
-#         ).decode()
-#         html = f'<div>{audio_src_block}{audio_player_block}</div>'
-#         if caption:
-#             html = html + f'<figcaption>{e(caption)}</figcaption>'
-#         return f'<figure class="audio-player-container">{html}</figure>'
+class StackAudio:
+    node_type = "audio"
+    templates_path = 'tiptapy/templates/extras'
+
+    def __init__(self):
+        environ = init_env(self.templates_path)
+        environ.globals['get_audio_player_block'] = get_audio_player_block
+        self.t = environ.get_template(f'{self.node_type}.html')
 #
 #
 # class StackDocument(BaseNode):
@@ -56,5 +51,5 @@ class FeaturedImage(Image):
 
 
 register_renderer(FeaturedImage)
-# register_renderer(StackAudio)
+register_renderer(StackAudio)
 # register_renderer(StackDocument)

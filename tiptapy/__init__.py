@@ -59,8 +59,8 @@ class BaseDoc:
     templates_path = 'tiptapy/templates/'
 
     def __init__(self):
-        templates = init_env(self.templates_path)
-        self.t = templates.get_template(f'{self.node_type}.html')
+        environ = init_env(self.templates_path)
+        self.t = environ.get_template(f'{self.node_type}.html')
 
 
     def render(self, in_data):

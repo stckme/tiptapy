@@ -5,7 +5,7 @@ from tiptapy import extras
 
 
 tags_to_test = (
-   "simple",
+    "simple",
     "blockquote",
     "bulletlist",
     "mark_tags",
@@ -30,8 +30,8 @@ tags_to_test = (
     "heading",
 #    "is_renderable",
     "code_block",
-#    "audio",
-#    "audio-no_caption",
+    "audio",
+    "audio-no_caption",
 #    "document-pdf",
 #    "document-sketch"
 )
