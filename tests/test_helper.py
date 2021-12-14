@@ -1,4 +1,4 @@
-from tiptapy import is_trusted_link
+from tiptapy.macros import is_trusted_link
 
 
 def test_is_trusted_link():
