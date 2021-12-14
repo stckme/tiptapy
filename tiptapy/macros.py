@@ -1,3 +1,4 @@
+import pkgutil
 from html import escape
 from urllib.parse import urlparse
 
@@ -33,3 +34,9 @@ def build_link_handler(config):
         return retval
 
     return handle_links
+
+
+def get_audio_player_block():
+    audio_player_block = pkgutil.get_data(
+        __name__, 'templates/stack-audio-player.html').decode()
+    return audio_player_block

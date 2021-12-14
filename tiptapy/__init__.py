@@ -4,7 +4,7 @@ from inspect import isclass
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 from typing import Dict
 from .image import url2mime
-from .macros import make_img_src, build_link_handler
+from .macros import make_img_src, build_link_handler, get_audio_player_block
 
 
 __version__ = '0.12.0'
@@ -21,6 +21,7 @@ def init_env(path, config):
     env.globals['handle_links'] = build_link_handler(config)
     # Cause jinja2 `e` filter is not exactly same as html.escape
     env.globals['escape'] = escape
+    env.globals['get_audio_player_block'] = get_audio_player_block
 
     return env
 
