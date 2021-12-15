@@ -1,7 +1,9 @@
-<p>
-{%- for item in node.content -%}
-  {%- with template=item.type + '.html', node=item -%} 
-      {%- include template -%}
-        {%- endwith -%}
-	{%- endfor -%}
-</p>
+{%- if node.content -%}
+  <p>
+  {%- for item in node.content -%}
+    {%- with template=item.type + '.html', node=item -%}
+        {%- include template -%}
+          {%- endwith -%}
+  	{%- endfor -%}
+  </p>
+{%- endif -%}
