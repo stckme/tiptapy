@@ -13,6 +13,7 @@ tags_to_test = (
     "paragraph-is_renderable",
     "paragraph-codemark",
     "image",
+    "image-is_renderable",
     "image-missing_caption",
     "image-no_caption",
     "image-mime_type",
