@@ -33,7 +33,9 @@ tags_to_test = (
     "code_block-is_renderable",
     "audio",
     "audio-no_caption",
+    "audio-is_renderable",
     "document-pdf",
+    "document-is_renderable",
     "document-sketch"
 )
 

@@ -1,0 +1,24 @@
+{
+  "title": "",
+  "type": "doc",
+  "content": [
+    {
+      "type": "document",
+      "attrs": {
+        "caption": "This is pdf caption.",
+        "name": "RE_40566006.pdf",
+        "size": "67.3KB",
+        "format": "pdf"
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Quick brown fox jumps over the lazy dog. "
+        }
+      ]
+    }
+  ]
+}
