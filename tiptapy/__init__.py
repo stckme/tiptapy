@@ -1,6 +1,7 @@
+import os
+import sys
 import json
 from html import escape
-from inspect import isclass
 from jinja2 import FileSystemLoader, Environment, select_autoescape
 from typing import Dict
 from .image import url2mime
@@ -28,15 +29,24 @@ def init_env(path, config):
     return env
 
 
+def _get_abs_template_path(path_str):
+    # This is equivalent of pkgutil.get_data
+    # But when directory is passed to pkgutil.get_data it throws IsDirectoryError
+    # Hence this function
+    # Ref: https://github.com/python/cpython/blob/3.10/Lib/pkgutil.py#L614
+    pkg_dir = os.path.dirname(sys.modules[__name__].__file__)
+    return os.path.join(pkg_dir, path_str)
+
+
 class BaseDoc:
 
     doc_type = 'doc'
-    templates_path = ['tiptapy/templates/', 'tiptapy/templates/extras']
+    templates_path = [_get_abs_template_path('templates'),
+                      _get_abs_template_path('templates/extras')]
 
     def __init__(self, config):
         environ = init_env(self.templates_path, config)
         self.t = environ.get_template(f'{self.doc_type}.html')
-
 
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
