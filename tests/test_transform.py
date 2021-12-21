@@ -19,6 +19,7 @@ tags_to_test = (
     "image-mime_type",
     "image-height_width",
     "featuredimage",
+    "featuredimage-is_renderable",
     "featuredimage-missing_caption",
     "featuredimage-no_caption",
     "featuredimage-mime_type",
