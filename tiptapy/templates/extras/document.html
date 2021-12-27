@@ -1,0 +1,15 @@
+{%- set caption = node.attrs.caption|trim -%}
+{%- set src = node.attrs.src|trim -%}
+{%- set size = node.attrs.size|trim -%}
+{%- set fname = node.attrs.name|trim -%}
+{%- set ext = node.attrs.format|trim -%}
+{%- if src and size and fname and ext -%}
+  {%- set doc_block = get_doc_block(ext, fname, size, src) -%}
+  <figure class="file-attachment">
+  {%- if caption -%}
+    {{doc_block}}<figcaption>{{caption}}</figcaption>
+  {%- else -%}
+    {{doc_block}}
+  {%- endif -%}
+  </figure>
+{%- endif -%}

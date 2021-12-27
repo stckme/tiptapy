@@ -1,0 +1,19 @@
+{%- if node.attrs.src -%}
+  {%- set image_url = node.attrs.src.image -%}
+  {%- set image_type = url2mime(image_url) -%}
+  {%- set fallback_url = node.attrs['src']['fallback'] -%}
+  {%- set fallback_type = url2mime(fallback_url) -%}
+
+  {%- set caption = node.attrs.caption|trim -%}
+  {%- set alt = node.attrs.alt|trim -%}
+  {%- set height = node.attrs.height -%}
+  {%- set width = node.attrs.width -%}
+
+  {%- if image_url or fallback_url -%}
+    <figure class="featured-image"><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
+    {%- if caption -%}
+      <figcaption>{{ caption }}</figcaption>
+    {%- endif -%}
+    </figure>
+  {%- endif -%}
+{%- endif -%}

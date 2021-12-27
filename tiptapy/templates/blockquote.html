@@ -1,0 +1,7 @@
+<blockquote>
+{%- for item in node.content -%}
+  {%- with template=item.type + '.html', node=item -%} 
+      {%- include template -%}
+        {%- endwith -%}
+	{%- endfor -%}
+</blockquote>

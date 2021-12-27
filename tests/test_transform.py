@@ -1,7 +1,6 @@
 import os
 import pytest
 import tiptapy
-from tiptapy import extras
 
 
 tags_to_test = (
@@ -14,11 +13,13 @@ tags_to_test = (
     "paragraph-is_renderable",
     "paragraph-codemark",
     "image",
+    "image-is_renderable",
     "image-missing_caption",
     "image-no_caption",
     "image-mime_type",
     "image-height_width",
     "featuredimage",
+    "featuredimage-is_renderable",
     "featuredimage-missing_caption",
     "featuredimage-no_caption",
     "featuredimage-mime_type",
@@ -30,11 +31,21 @@ tags_to_test = (
     "heading",
     "is_renderable",
     "code_block",
+    "code_block-is_renderable",
     "audio",
     "audio-no_caption",
+    "audio-is_renderable",
     "document-pdf",
+    "document-is_renderable",
     "document-sketch"
 )
+
+class config:
+    """
+    Config class to store constans which are used by the othe nodes.
+    """
+    DOMAIN = "python.org"
+
 
 
 def build_test_data():
@@ -62,4 +73,6 @@ def test_html_tag(tag):
     """
     tag_data = json_data[tag]
     expected_html = html_data[tag]
-    assert tiptapy.to_html(tag_data) == expected_html.strip()
+
+    renderer = tiptapy.BaseDoc(config)
+    assert renderer.render(tag_data) == expected_html.strip()

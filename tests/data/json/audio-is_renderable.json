@@ -1,0 +1,21 @@
+{
+  "title": "Audio Block",
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Quick brown fox jumps over the lazy dog. "
+        }
+      ]
+    },
+    {
+      "type": "audio",
+      "attrs": {
+        "caption": "YetAnotherPodcaster"
+      }
+    }
+  ]
+}

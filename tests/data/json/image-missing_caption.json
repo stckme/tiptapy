@@ -1,7 +1,12 @@
 {
-  "type": "image",
-  "attrs": {
-    "src": { "image": "https://placekitten.com/200/301", "fallback": "https://placekitten.com/198/654" },
-    "alt": "Sleepy Kitten"
-  }
+  "type": "doc",
+  "content": [
+    {
+      "type": "image",
+      "attrs": {
+        "src": { "image": "https://placekitten.com/200/301", "fallback": "https://placekitten.com/198/654" },
+        "alt": "Sleepy Kitten"
+      }
+    }
+   ]
 }

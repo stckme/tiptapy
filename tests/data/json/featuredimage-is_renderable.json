@@ -1,0 +1,22 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "featuredimage",
+      "attrs": {
+        "src": "",
+        "alt": "Brown Kitten Image",
+        "caption": "Cute Kitty"
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Quick brown fox jumps over the lazy dog. "
+        }
+      ]
+    }
+   ]
+}

@@ -1,0 +1,7 @@
+<h{{node.attrs.level|default(1)}}>
+{%- for item in node.content -%}
+  {%- with template=item.type + '.html', node=item -%} 
+      {%- include template -%}
+        {%- endwith -%}
+	{%- endfor -%}
+</h{{node.attrs.level|default(1)}}>

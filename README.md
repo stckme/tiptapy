@@ -65,7 +65,15 @@ s = """
 }
 """
 
-out = tiptapy.to_html(s)
+class config:
+    """
+    Config class to store constants used by the other nodes.
+    """
+    DOMAIN = "python.org"
+
+
+renderer = tiptapy.BaseDoc(config)
+out = renderer.render(s)
 print(out)
 ```
 
