@@ -9,14 +9,15 @@ from .macros import (make_img_src, build_link_handler,
                      get_audio_player_block, get_doc_block)
 
 
-__version__ = '0.13.0'
+__version__ = '0.13.1'
 
 renderers: Dict = {}
 
 
 def init_env(path, config):
     env = Environment(loader=FileSystemLoader(path),
-                      autoescape=select_autoescape(enabled_extensions=('html')))
+                      autoescape=select_autoescape(
+                          enabled_extensions=('html')))
     # https://stackoverflow.com/a/6038550
     env.globals['url2mime'] = url2mime
     env.globals['make_img_src'] = make_img_src
@@ -31,7 +32,7 @@ def init_env(path, config):
 
 def _get_abs_template_path(path_str):
     # This is equivalent of pkgutil.get_data
-    # But when directory is passed to pkgutil.get_data it throws IsDirectoryError
+    # But when diris passed to pkgutil.get_data it throws IsDirectoryError
     # Hence this function
     # Ref: https://github.com/python/cpython/blob/3.10/Lib/pkgutil.py#L614
     pkg_dir = os.path.dirname(sys.modules[__name__].__file__)
@@ -41,12 +42,16 @@ def _get_abs_template_path(path_str):
 class BaseDoc:
 
     doc_type = 'doc'
-    templates_path = [_get_abs_template_path('templates'),
-                      _get_abs_template_path('templates/extras')]
+    templates_path = (_get_abs_template_path('templates'),
+                      _get_abs_template_path('templates/extras'))
 
     def __init__(self, config):
         environ = init_env(self.templates_path, config)
         self.t = environ.get_template(f'{self.doc_type}.html')
+        self.t.environment.globals['locked'] = self.locked
+        # `locked` helps in decidding elements to show/hide in anonymous views
+        # useful in case you are referring same template for both protected
+        # and guest views
 
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
