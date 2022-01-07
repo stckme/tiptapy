@@ -2,6 +2,15 @@
 History
 =======
 
+0.13.1 (2022-01-07)
+-------------------
+* New Doc attribute `locked` to support guest views
+* Doc.templates_path is now immutable 
+
+0.13.0 (2021-12-27)
+-------------------
+* Major rewrite that moved rendering logic to jinja templates (no longer python string manipulations)
+
 0.12.0 (2021-11-23)
 -------------------
 * Start attribute added for Ordered List
