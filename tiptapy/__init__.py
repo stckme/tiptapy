@@ -44,14 +44,15 @@ class BaseDoc:
     doc_type = 'doc'
     templates_path = (_get_abs_template_path('templates'),
                       _get_abs_template_path('templates/extras'))
+    locked = False
+    # `locked` helps in templates determine to show/hide in anonymous views
+    # Useful in case where code is referring same template for both protected
+    # and guest views
 
     def __init__(self, config):
         environ = init_env(self.templates_path, config)
         self.t = environ.get_template(f'{self.doc_type}.html')
         self.t.environment.globals['locked'] = self.locked
-        # `locked` helps in decidding elements to show/hide in anonymous views
-        # useful in case you are referring same template for both protected
-        # and guest views
 
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
