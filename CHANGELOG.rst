@@ -2,7 +2,7 @@
 History
 =======
 
-0.13.1 (2022-01-07)
+0.13.2 (2022-01-07)
 -------------------
 * New Doc attribute `locked` to support guest views
 * Doc.templates_path is now immutable 
