@@ -28,6 +28,7 @@ tags_to_test = (
     "embed",
     "embed-missing_caption",
     "embed-no_caption",
+    "embed-null_caption",
     "heading",
     "is_renderable",
     "code_block",
@@ -40,12 +41,12 @@ tags_to_test = (
     "document-sketch"
 )
 
+
 class config:
     """
     Config class to store constans which are used by the othe nodes.
     """
     DOMAIN = "python.org"
-
 
 
 def build_test_data():
