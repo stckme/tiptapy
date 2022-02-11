@@ -23,20 +23,20 @@
 {%- endif -%}
 {%- endmacro -%}
 
+{%- set text_out = node.text -%}
 {%- for mark in node.marks -%}
   {%- if mark.type == "bold" -%}
-    {{ render_strong(node.text)}}
+  {%- set text_out = render_strong(text_out) -%}
   {%- elif mark.type == "sup" -%}
-    {{ render_sup(node.text)}}
+  {%- set text_out = render_sup(text_out) -%}
   {%- elif mark.type == "italic" -%}
-    {{ render_em(node.text)}}
+  {%- set text_out = render_em(text_out) -%}
   {%- elif mark.type == "code" -%}
-    {{ render_code(node.text)}}
+  {%- set text_out = render_code(text_out) -%}
   {%- elif mark.type == "link" -%}
-    {{ render_link(mark.attrs, node.text)}}
-  {%- elif mark == "" -%}
-    {{ node.text }}
+  {%- set text_out = render_link(mark.attrs, text_out) -%}
   {%- endif -%}
+{{ text_out }}
 {%- else -%}
-  {{ node.text }}
+{{ text_out }}
 {%- endfor -%}
