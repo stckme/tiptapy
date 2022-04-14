@@ -4,6 +4,34 @@ from urllib.parse import urlparse
 from string import Template
 
 
+def render_text(node):
+    domain = 'stck.me'
+    mark_tags = {
+        "bold": "strong", "italic": "em",
+        "link": "a", "sup": "sup", "code": "code"
+    }
+    text = escape(node["text"])
+    marks = node.get("marks")
+    if marks:
+        for mark in marks:
+            tag = mark_tags.get(mark.get("type"))
+            attrs = mark.get("attrs")
+            if attrs:
+                if tag == "a":
+                    url = attrs.get("href") or ""
+                    link = urlparse(url)
+                    if not link.netloc.endswith(domain):
+                        attrs["target"] = "_blank"
+                        attrs["rel"] = "noopener nofollow"
+                    attrs_s = " ".join(
+                        f'{k}="{escape(v)}"' for k, v in attrs.items()
+                    )
+                    text = f"<{tag} {attrs_s}>{text}</{tag}>"
+            else:
+                text = f"<{tag}>{text}</{tag}>"
+    return text
+
+
 def make_img_src(attrs):
     alt = attrs.get('alt', '').strip()
     height = attrs.get('height', '')
@@ -44,7 +72,8 @@ def get_audio_player_block():
 
 
 def get_doc_block(ext, fname, size, src):
-    document_block = pkgutil.get_data(__name__, 'templates/stack-document.html').decode()
+    document_block = pkgutil.get_data(
+        __name__, 'templates/stack-document.html').decode()
     document = Template(document_block)
     html = document.substitute(fileformat=ext[:4], filename=fname,
                                filesize=size, filesrc=src)
