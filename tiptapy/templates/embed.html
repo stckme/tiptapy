@@ -9,7 +9,7 @@
 {%- endfor -%}
 {%- if node.attrs.type == "video" -%}
   {%- if node.attrs.caption and node.attrs.caption|trim -%}
-<figure>{{node.attrs.html}}<figcaption>{{node.attrs.caption}}</figcaption></figure>
+<figure>{{node.attrs.html}}<figcaption>{{escape(node.attrs.caption)}}</figcaption></figure>
   {%- else -%}
 <figure>{{html}}</figure>
   {%- endif -%}
