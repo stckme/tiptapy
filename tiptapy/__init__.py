@@ -9,7 +9,7 @@ from .macros import (make_img_src, build_link_handler,
                      get_audio_player_block, get_doc_block)
 
 
-__version__ = '0.13.3'
+__version__ = '0.14.0'
 
 renderers: Dict = {}
 
