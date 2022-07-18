@@ -11,7 +11,7 @@
   {%- if image_url or fallback_url -%}
     <figure><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
       {%- if caption -%}
-        <figcaption>{{ caption }}</figcaption>
+        <figcaption>{{ escape(caption) }}</figcaption>
       {%- endif -%}
     </figure>
   {%- endif -%}

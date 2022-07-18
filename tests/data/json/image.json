@@ -6,7 +6,7 @@
       "attrs": {
         "src": { "image": "https://placekitten.com/200/301", "fallback": "https://placekitten.com/198/654" },
         "alt": "Sleepy Kitten",
-        "caption": "Cute Kitty"
+        "caption": "<script>alert(23)</script>Cute Kitty"
       }
     }
    ]

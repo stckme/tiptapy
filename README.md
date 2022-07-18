@@ -10,6 +10,12 @@
 pip install tiptapy
 ```
 
+### Test
+
+```bash
+python -m pytest
+```
+
 ### Usage
 
 ``` {.sourceCode .python}

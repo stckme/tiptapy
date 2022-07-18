@@ -12,6 +12,7 @@ tags_to_test = (
     "paragraph",
     "paragraph-is_renderable",
     "paragraph-codemark",
+    "paragraph-escape",
     "image",
     "image-is_renderable",
     "image-missing_caption",

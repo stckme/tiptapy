@@ -1,0 +1,28 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "sup"
+            }
+          ],
+          "text": "<script>alert(23)</script>"
+        }
+      ]
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "<strong>Bold text</strong>"
+        }
+      ]
+    }
+  ]
+}

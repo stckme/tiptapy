@@ -25,18 +25,18 @@
 
 {%- for mark in node.marks -%}
   {%- if mark.type == "bold" -%}
-    {{ render_strong(node.text)}}
+    {{ render_strong(escape(node.text))}}
   {%- elif mark.type == "sup" -%}
-    {{ render_sup(node.text)}}
+    {{ render_sup(escape(node.text))}}
   {%- elif mark.type == "italic" -%}
-    {{ render_em(node.text)}}
+    {{ render_em(escape(node.text))}}
   {%- elif mark.type == "code" -%}
-    {{ render_code(node.text)}}
+    {{ render_code(escape(node.text))}}
   {%- elif mark.type == "link" -%}
-    {{ render_link(mark.attrs, node.text)}}
+    {{ render_link(mark.attrs, escape(node.text))}}
   {%- elif mark == "" -%}
-    {{ node.text }}
+    {{ escape(node.text) }}
   {%- endif -%}
 {%- else -%}
-  {{ node.text }}
+  {{ escape(node.text) }}
 {%- endfor -%}
