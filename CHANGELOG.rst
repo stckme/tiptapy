@@ -2,6 +2,10 @@
 History
 =======
 
+0.14.0 (2022-07-18)
+-------------------
+* Escape markup while converting to HTML
+
 0.13.2 (2022-01-07)
 -------------------
 * New Doc attribute `locked` to support guest views
