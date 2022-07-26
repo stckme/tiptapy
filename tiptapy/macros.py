@@ -30,7 +30,7 @@ def build_link_handler(config):
                 attrs["target"] = "_blank"
                 attrs["rel"] = "noopener nofollow"
             retval = " ".join(
-                f'{k}="{escape(v)}"' for k, v in attrs.items()
+                f'{k}="{escape(v)}"' for k, v in attrs.items() if v is not None
             )
         return retval
 
