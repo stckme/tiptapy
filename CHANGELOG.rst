@@ -2,6 +2,10 @@
 History
 =======
 
+0.15.0 (2022-07-27)
+-------------------
+* A few fixes and more Jinja based conversion
+
 0.14.0 (2022-07-18)
 -------------------
 * Escape markup while converting to HTML
