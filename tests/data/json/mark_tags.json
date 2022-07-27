@@ -15,7 +15,7 @@
                 "type": "bold"
               }
             ],
-            "text": "bold"
+            "text": "bold text"
           },
           {
             "type": "text",
@@ -28,7 +28,23 @@
                 "type": "italic"
               }
             ],
-            "text": "italic"
+            "text": "italic text"
+          },
+          {
+            "type": "text",
+            "text": ", this is "
+          },
+          {
+            "type": "text",
+            "marks": [
+              {
+                "type": "italic"
+              },
+              {
+                "type": "bold"
+              }
+            ],
+            "text": "<script>alert('hello');</script> italic and bold text"
           },
           {
             "type": "text",

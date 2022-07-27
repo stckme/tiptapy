@@ -1,0 +1,6 @@
+{%- set attr_s = handle_links(mark.attrs) -%}
+{%- if attr_s -%}
+<a {{ attr_s }}>{{ text }}</a>
+{%- else -%}
+<a>{{ text }}</a>
+{%- endif -%}

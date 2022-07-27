@@ -1,42 +1,10 @@
-{%- macro render_strong(text) -%}
-<strong>{{ text }}</strong>
-{%- endmacro -%}
-
-{%- macro render_sup(text) -%}
-<sup>{{ text }}</sup>
-{%- endmacro -%}
-
-{%- macro render_em(text) -%}
-<em>{{ text }}</em>
-{%- endmacro -%}
-
-{%- macro render_code(text) -%}
-<code>{{ text }}</code>
-{%- endmacro -%}
-
-{%- macro render_link(attrs, text) -%}
-{%- set attr_s = handle_links(attrs) -%}
-{%- if attr_s -%}
-<a {{ attr_s}}>{{text }}</a>
-{%- else -%}
-<a> {{ text }}</a>
-{%- endif -%}
-{%- endmacro -%}
-
+{% set ns = namespace(text=escape(node.text)) %}
 {%- for mark in node.marks -%}
-  {%- if mark.type == "bold" -%}
-    {{ render_strong(escape(node.text))}}
-  {%- elif mark.type == "sup" -%}
-    {{ render_sup(escape(node.text))}}
-  {%- elif mark.type == "italic" -%}
-    {{ render_em(escape(node.text))}}
-  {%- elif mark.type == "code" -%}
-    {{ render_code(escape(node.text))}}
-  {%- elif mark.type == "link" -%}
-    {{ render_link(mark.attrs, escape(node.text))}}
-  {%- elif mark == "" -%}
-    {{ escape(node.text) }}
-  {%- endif -%}
-{%- else -%}
-  {{ escape(node.text) }}
+  {%- set ns.text -%}
+    {%- with template='marks/' + mark.type + '.html', text=ns.text, mark=mark -%}
+      {%- include template -%}
+    {%- endwith -%}
+  {%- endset -%}
 {%- endfor -%}
+
+{{ns.text}}
