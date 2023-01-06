@@ -6,8 +6,8 @@ from jinja2 import FileSystemLoader, Environment, select_autoescape
 from typing import Dict
 from .image import url2mime
 from .macros import (make_img_src, build_link_handler,
-                     get_audio_player_block, get_doc_block)
-
+                     get_audio_player_block, get_doc_block,
+                     get_snake_case)
 
 __version__ = '0.15.1'
 
@@ -26,6 +26,7 @@ def init_env(path, config):
     env.globals['escape'] = escape
     env.globals['get_audio_player_block'] = get_audio_player_block
     env.globals['get_doc_block'] = get_doc_block
+    env.globals['get_snake_case'] = get_snake_case
 
     return env
 

@@ -1,4 +1,5 @@
 import pkgutil
+import re
 from html import escape
 from urllib.parse import urlparse
 from string import Template
@@ -49,3 +50,7 @@ def get_doc_block(ext, fname, size, src):
     html = document.substitute(fileformat=ext[:4], filename=fname,
                                filesize=size, filesrc=src)
     return html
+
+
+def get_snake_case(name):
+    return re.sub('(?<!^)(?=[A-Z])', '_', name).lower()

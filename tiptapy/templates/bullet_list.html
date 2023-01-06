@@ -1,6 +1,7 @@
 <ul>
 {%- for item in node.content -%}
-  {%- with template=item.type + '.html', node=item -%} 
+  {%- set template_name = get_snake_case(item.type + '.html') -%}
+  {%- with template=template_name, node=item -%}
       {%- include template -%}
         {%- endwith -%}
 	{%- endfor -%}
