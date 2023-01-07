@@ -1,7 +1,5 @@
 import os
-
 import pytest
-
 import tiptapy
 
 tags_to_test = (
