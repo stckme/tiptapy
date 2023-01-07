@@ -1,7 +1,8 @@
 import os
-import pytest
-import tiptapy
 
+import pytest
+
+import tiptapy
 
 tags_to_test = (
     "simple",
@@ -39,7 +40,8 @@ tags_to_test = (
     "audio-is_renderable",
     "document-pdf",
     "document-is_renderable",
-    "document-sketch"
+    "document-sketch",
+    "camel-case"
 )
 
 
