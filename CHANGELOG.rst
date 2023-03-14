@@ -2,6 +2,10 @@
 History
 =======
 
+0.16.0 (2023-03-14)
+-------------------
+* Support for new tiptap versions that uses camelCase over snake_case
+
 0.15.0 (2022-07-27)
 -------------------
 * A few fixes and more Jinja based conversion
