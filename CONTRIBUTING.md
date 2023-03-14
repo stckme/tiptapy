@@ -9,8 +9,10 @@ pytest -xv
 # Build / Release
 
 ```
-python setup.py build sdist
 bumpversion --dry-run --verbose patch  # or major, minor
 bumpversion run patch  # or major, minor
-twine upload dist/*
+
+rm -rf dist/ build/
+python setup.py build sdist
+twine upload dist/tiptapy-*.tar.gz --repository tiptapy
 ```
