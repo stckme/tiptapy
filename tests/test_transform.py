@@ -39,7 +39,8 @@ tags_to_test = (
     "audio-is_renderable",
     "document-pdf",
     "document-is_renderable",
-    "document-sketch"
+    "document-sketch",
+    "camel-case"
 )
 
 
