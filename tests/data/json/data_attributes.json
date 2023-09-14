@@ -1,0 +1,26 @@
+{
+  "type": "doc",
+  "attrs": {"data": {"show-gap": "true", "type": "imageStrip"}},
+  "content": [
+    {
+      "type": "image",
+      "attrs": {
+        "src": { "image": "https://placekitten.com/200/301", "fallback": "https://placekitten.com/200/301" },
+        "alt": "Sleepy Kitten",
+        "caption": "Cute Kitty",
+        "height": 400,
+        "width": 300
+      }
+    },
+    {
+      "type": "image",
+      "attrs": {
+        "src": { "image": "https://placekitten.com/200/301", "fallback": "https://placekitten.com/200/301" },
+        "alt": "Happy Kitten",
+        "caption": "New Kitty",
+        "height": 400,
+        "width": 300
+      }
+    }
+   ]
+}
