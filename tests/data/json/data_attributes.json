@@ -1,6 +1,6 @@
 {
   "type": "doc",
-  "attrs": {"data": {"show-gap": "true", "type": "imageStrip"}},
+  "attrs": {"show-gap": "true", "type": "imageStrip"},
   "content": [
     {
       "type": "image",
