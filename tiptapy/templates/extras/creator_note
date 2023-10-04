@@ -1,0 +1,15 @@
+<div class="creator-note-container">
+  <div class="creator-note-header">
+    <i class="icon pen-icon"></i>
+    <span class="creator-note-header-label">Creator’s note</span>
+  </div>
+  <div class="creator-note-body">
+    {%- if node -%}
+    {%- for item in node.content %}
+      {%- with template=item.type + '.html', node=item %}
+        {% include template %}
+      {%- endwith %}
+    {%- endfor %}
+    {%- endif %}
+  </div>
+</div>
