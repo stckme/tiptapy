@@ -1,4 +1,4 @@
-{%- if node.get("attrs", Null) -%}
+{%- if node.get("attrs", {}).data -%}
   <div{% for attr, value in node.attrs.items() %} data-{{attr}}="{{value}}"{% endfor %}>
 {%- endif -%}
 {%- for item in node.content -%}
@@ -6,6 +6,6 @@
     {%- include template -%}
   {%- endwith -%}
 {%- endfor -%}
-{%- if node.get("attrs", Null) -%}
+{%- if node.get("attrs", {}).data -%}
   </div>
 {%- endif -%}
