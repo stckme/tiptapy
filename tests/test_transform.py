@@ -40,7 +40,8 @@ tags_to_test = (
     "document-pdf",
     "document-is_renderable",
     "document-sketch",
-    "camel-case"
+    "camel-case",
+    "data_attributes"
 )
 
 
