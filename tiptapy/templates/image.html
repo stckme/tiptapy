@@ -1,8 +1,8 @@
 {%- if node.attrs.src -%}
   {%- set caption = node.attrs.caption|trim|escape -%}
-  {%- set alt = node.attrs.alt|trim -%}
-  {%- set height = node.attrs.height -%}
-  {%- set width = node.attrs.width -%}
+  {%- set alt = node.attrs.alt|trim|escape -%}
+  {%- set height = node.attrs.height|str|escape -%}
+  {%- set width = node.attrs.width|str|escape -%}
   {%- set image_url = node.attrs.src.image|trim|escape -%}
   {%- set image_type = url2mime(image_url) -%}
   {%- set fallback_url = node.attrs.src.fallback|trim|escape -%}
