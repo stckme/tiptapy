@@ -1,4 +1,4 @@
-{% set ns = namespace(text=escape(node.text)) %}
+{% set ns = namespace(text=node.text) %}
 {%- for mark in node.marks -%}
   {%- set ns.text -%}
     {%- with template='marks/' + mark.type + '.html', text=ns.text, mark=mark -%}

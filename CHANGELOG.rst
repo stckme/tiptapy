@@ -4,7 +4,7 @@ History
 
 0.18.0 (2024-02-09)
 -------------------
-- html.escape all the url attributes
+- html.escape all the attributes
 - Match link domain more precisely.
 - Image height or width can be individually specified
 

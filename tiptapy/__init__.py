@@ -28,10 +28,6 @@ def init_env(path, config):
     env.globals["url2mime"] = url2mime
     env.globals["make_img_src"] = make_img_src
     env.globals["handle_links"] = build_link_handler(config)
-    # Cause jinja2 `e` filter is not exactly same as html.escape
-    env.globals["escape"] = escape
-    env.filters["escape"] = escape
-    env.filters["str"] = str
     env.globals["get_audio_player_block"] = get_audio_player_block
     env.globals["get_doc_block"] = get_doc_block
 
@@ -45,6 +41,19 @@ def _get_abs_template_path(path_str):
     # Ref: https://github.com/python/cpython/blob/3.10/Lib/pkgutil.py#L614
     pkg_dir = os.path.dirname(sys.modules[__name__].__file__)
     return os.path.join(pkg_dir, path_str)
+
+
+def escape_recursive(node):
+    if isinstance(node, dict):
+        for k, v in node.items():
+            if k != "html":
+                node[k] = escape_recursive(v)
+    elif isinstance(node, list):
+        for i, v in enumerate(node):
+            node[i] = escape_recursive(v)
+    elif isinstance(node, str):
+        return escape(node)
+    return node
 
 
 class BaseDoc:
@@ -66,4 +75,5 @@ class BaseDoc:
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
         node = in_data if isinstance(in_data, dict) else json.loads(in_data)
+        node = escape_recursive(node)
         return self.t.render(node=node)

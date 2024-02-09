@@ -1,11 +1,11 @@
 {%- if node.attrs.src -%}
-  {%- set caption = node.attrs.caption|trim|escape -%}
-  {%- set alt = node.attrs.alt|trim|escape -%}
-  {%- set height = node.attrs.height|str|escape -%}
-  {%- set width = node.attrs.width|str|escape -%}
-  {%- set image_url = node.attrs.src.image|trim|escape -%}
+  {%- set caption = node.attrs.caption|trim -%}
+  {%- set alt = node.attrs.alt|trim -%}
+  {%- set height = node.attrs.height -%}
+  {%- set width = node.attrs.width -%}
+  {%- set image_url = node.attrs.src.image|trim -%}
   {%- set image_type = url2mime(image_url) -%}
-  {%- set fallback_url = node.attrs.src.fallback|trim|escape -%}
+  {%- set fallback_url = node.attrs.src.fallback|trim -%}
   {%- set fallback_type = url2mime(fallback_url) -%}
 
   {%- if image_url or fallback_url -%}

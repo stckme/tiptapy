@@ -69,10 +69,8 @@ def build_test_data():
 
             ## Use this to (re)generate the html files
             # if data_type == "json":
-            #     renderer = tiptapy.BaseDoc(config)
-            #     rendered = renderer.render(data)
             #     with open(file_path.replace("json", "html"), "w") as f:
-            #         f.write(rendered)
+            #         f.write(tiptapy.BaseDoc(config).render(data))
 
     return store["json"], store["html"]
 

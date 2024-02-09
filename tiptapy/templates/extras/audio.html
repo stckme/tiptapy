@@ -1,7 +1,7 @@
 {%- if node.attrs.src -%}
-  {%- set caption = node.attrs.caption|trim|escape -%}
+  {%- set caption = node.attrs.caption|trim -%}
   {%- set audio_player_block = get_audio_player_block() -%}
-  {%- set src = node.attrs.src|trim|escape -%}
+  {%- set src = node.attrs.src|trim -%}
 
   <figure class="audio-player-container">
     {%- if caption -%}
