@@ -1,36 +1,35 @@
 import pkgutil
 from html import escape
 from string import Template
-from urllib.parse import quote_plus, urlparse
+from urllib.parse import urlparse
 
 
 def make_img_src(attrs):
-    alt = attrs.get("alt", "").strip()
-    height = attrs.get("height", "")
-    width = attrs.get("width", "")
-    fallback_url = quote_plus(attrs["src"]["fallback"]).strip()
-    image_src = f'img src="{fallback_url}"'
+    alt = escape(attrs.get("alt", "").strip())
+    height = escape(str(attrs.get("height", "")))
+    width = escape(str(attrs.get("width", "")))
+    fallback_url = escape(attrs["src"]["fallback"].strip())
+    img = f'img src="{fallback_url}"'
     if alt:
-        image_src += f' alt="{escape(alt)}"'
+        img += f' alt="{alt}"'
     if width:
-        image_src += f' width="{width}"'
+        img += f' width="{width}"'
     if height:
-        image_src += f' height="{height}"'
+        img += f' height="{height}"'
 
-    return image_src
+    return img
 
 
 def build_link_handler(config):
     def handle_links(attrs):
         retval = None
         if attrs:
-            url = quote_plus(attrs.pop("href", "")).strip()
+            url = attrs.get("href", "").strip()
             link = urlparse(url)
             if not (
                 link.netloc == config.DOMAIN
                 or link.netloc.endswith(f".{config.DOMAIN}")
             ):
-                attrs["href"] = url
                 attrs["target"] = "_blank"
                 attrs["rel"] = "noopener nofollow"
             retval = " ".join(

@@ -1,18 +1,18 @@
 {%- if node.attrs.src -%}
-  {%- set image_url = node.attrs.src.image|trim|quote_plus -%}
+  {%- set image_url = node.attrs.src.image|trim|escape -%}
   {%- set image_type = url2mime(image_url) -%}
-  {%- set fallback_url = node.attrs.src.fallback|trim|quote_plus -%}
+  {%- set fallback_url = node.attrs.src.fallback|trim|escape -%}
   {%- set fallback_type = url2mime(fallback_url) -%}
 
-  {%- set caption = node.attrs.caption|trim -%}
-  {%- set alt = node.attrs.alt|trim -%}
-  {%- set height = node.attrs.height -%}
-  {%- set width = node.attrs.width -%}
+  {%- set caption = node.attrs.caption|trim|escape -%}
+  {%- set alt = node.attrs.alt|trim|escape -%}
+  {%- set height = node.attrs.height|str|escape -%}
+  {%- set width = node.attrs.width|str|escape -%}
 
   {%- if image_url or fallback_url -%}
     <figure class="featured-image"><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
     {%- if caption -%}
-      <figcaption>{{ escape(caption) }}</figcaption>
+      <figcaption>{{ caption }}</figcaption>
     {%- endif -%}
     </figure>
   {%- endif -%}

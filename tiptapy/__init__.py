@@ -12,7 +12,6 @@ from .macros import (
     get_audio_player_block,
     get_doc_block,
     make_img_src,
-    quote_plus,
 )
 
 __version__ = "0.18.0"
@@ -31,9 +30,10 @@ def init_env(path, config):
     env.globals["handle_links"] = build_link_handler(config)
     # Cause jinja2 `e` filter is not exactly same as html.escape
     env.globals["escape"] = escape
+    env.filters["escape"] = escape
+    env.filters["str"] = str
     env.globals["get_audio_player_block"] = get_audio_player_block
     env.globals["get_doc_block"] = get_doc_block
-    env.filters["quote_plus"] = quote_plus
 
     return env
 
