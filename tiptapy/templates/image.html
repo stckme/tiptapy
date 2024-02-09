@@ -3,9 +3,9 @@
   {%- set alt = node.attrs.alt|trim -%}
   {%- set height = node.attrs.height -%}
   {%- set width = node.attrs.width -%}
-  {%- set image_url = node.attrs.src.image -%}
+  {%- set image_url = node.attrs.src.image|trim|quote_plus -%}
   {%- set image_type = url2mime(image_url) -%}
-  {%- set fallback_url = node.attrs['src']['fallback'] -%}
+  {%- set fallback_url = node.attrs.src.fallback|trim|quote_plus -%}
   {%- set fallback_type = url2mime(fallback_url) -%}
 
   {%- if image_url or fallback_url -%}
