@@ -33,7 +33,7 @@ def init_env(path, config):
     env.globals["escape"] = escape
     env.globals["get_audio_player_block"] = get_audio_player_block
     env.globals["get_doc_block"] = get_doc_block
-    env.globals["quote_plus"] = quote_plus
+    env.filters["quote_plus"] = quote_plus
 
     return env
 
