@@ -4,9 +4,9 @@
 
   <figure class="audio-player-container">
     {%- if caption -%}
-      <div><audio src={{node.attrs.src|trim}}></audio>{{audio_player_block}}</div><figcaption>{{escape(caption)}}</figcaption>
+      <div><audio src={{node.attrs.src|trim|quote_plus}}></audio>{{audio_player_block}}</div><figcaption>{{escape(caption)}}</figcaption>
     {%- else -%}
-      <div><audio src={{node.attrs.src|trim}}></audio>{{audio_player_block}}</div>
+      <div><audio src={{node.attrs.src|trim|quote_plus}}></audio>{{audio_player_block}}</div>
     {%- endif -%}
   </figure>
 {%- endif -%}

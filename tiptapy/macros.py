@@ -1,19 +1,21 @@
 import pkgutil
 from html import escape
-from urllib.parse import urlparse
 from string import Template
+from urllib.parse import quote_plus, urlparse
 
 
 def make_img_src(attrs):
     alt = attrs.get("alt", "").strip()
     height = attrs.get("height", "")
     width = attrs.get("width", "")
-    fallback_url = attrs["src"]["fallback"]
+    fallback_url = quote_plus(attrs["src"]["fallback"]).strip()
     image_src = f'img src="{fallback_url}"'
     if alt:
         image_src += f' alt="{escape(alt)}"'
-    if height and width:
-        image_src += f'width="{width}" height="{height}"'
+    if width:
+        image_src += f' width="{width}"'
+    if height:
+        image_src += f' height="{height}"'
 
     return image_src
 
@@ -22,9 +24,13 @@ def build_link_handler(config):
     def handle_links(attrs):
         retval = None
         if attrs:
-            url = attrs.get("href") or ""
+            url = quote_plus(attrs.pop("href", "")).strip()
             link = urlparse(url)
-            if not link.netloc.endswith(config.DOMAIN):
+            if not (
+                link.netloc == config.DOMAIN
+                or link.netloc.endswith(f".{config.DOMAIN}")
+            ):
+                attrs["href"] = url
                 attrs["target"] = "_blank"
                 attrs["rel"] = "noopener nofollow"
             retval = " ".join(
