@@ -1,6 +1,6 @@
-{%- set language = node.attrs.language|default("") -%}
+{%- set language = node.attrs.language|default("")|escape -%}
 {%- if node.content -%}
-  {%- set text = escape(node.content[0].text) -%}
+  {%- set text = node.content[0].text|escape -%}
   {%- if text -%}
     <div><pre>
       {%- if language -%}
