@@ -1,4 +1,5 @@
 import pkgutil
+from html import escape
 from string import Template
 from urllib.parse import urlparse
 
@@ -31,7 +32,9 @@ def build_link_handler(config):
             ):
                 attrs["target"] = "_blank"
                 attrs["rel"] = "noopener nofollow"
-            retval = " ".join(f'{k}="{v}"' for k, v in attrs.items() if v is not None)
+            retval = " ".join(
+                f'{escape(k)}="{escape(v)}"' for k, v in attrs.items() if v is not None
+            )
         return retval
 
     return handle_links

@@ -69,13 +69,16 @@ def escape_values_recursive(node):
     html_key = "html"  # key to look for html content
     if isinstance(node, dict):
         for k, v in node.items():
-            if k == html_key:
+            esc_k = escape(k)
+            if k != esc_k:
+                node[esc_k] = node.pop(k)
+            if esc_k == html_key:
                 # Allow only iframe tag
                 p = IFrameParser()
                 p.feed(v)
-                node[k] = p.iframe
+                node[esc_k] = p.iframe
             else:
-                node[k] = escape_values_recursive(v)
+                node[esc_k] = escape_values_recursive(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
             node[i] = escape_values_recursive(v)
