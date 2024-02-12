@@ -49,7 +49,6 @@ class IFrameParser(HTMLParser):
 
     def __init__(self):
         super().__init__()
-        self.is_reading = False
         self.depth = 0
         self.data = []
 
@@ -67,11 +66,9 @@ class IFrameParser(HTMLParser):
             return
         self.data.append(f"</{tag}>")
         self.depth -= 1
-        if self.depth == 0:
-            self.is_reading = False
 
     def handle_data(self, data):
-        if not self.is_reading:
+        if self.depth <= 0:
             return
         self.data.append(data)
 
