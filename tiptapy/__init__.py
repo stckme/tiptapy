@@ -53,11 +53,12 @@ class IFrameParser(HTMLParser):
         self.iframe = ""
 
     def handle_starttag(self, tag, attrs):
+        if tag != self.allowed_tag:
+            return
+
         if self.is_reading_iframe:
             raise ValueError("Only one iframe tag is allowed")
 
-        if tag != self.allowed_tag:
-            return
         _attrs = " ".join(
             [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
         )
