@@ -71,7 +71,7 @@ def escape_values_recursive(node):
         for k, v in node.items():
             esc_k = escape(k)
             if k != esc_k:
-                node[esc_k] = node.pop(k)
+                node.pop(k)
             if esc_k == html_key:
                 # Allow only iframe tag
                 p = IFrameParser()
