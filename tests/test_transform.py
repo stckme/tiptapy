@@ -1,7 +1,8 @@
 import os
-import pytest
-import tiptapy
 
+import pytest
+
+import tiptapy
 
 tags_to_test = (
     "simple",
@@ -41,7 +42,7 @@ tags_to_test = (
     "document-is_renderable",
     "document-sketch",
     "camel-case",
-    "data_attributes"
+    "data_attributes",
 )
 
 
@@ -49,22 +50,31 @@ class config:
     """
     Config class to store constans which are used by the othe nodes.
     """
+
     DOMAIN = "python.org"
 
 
-def build_test_data():
+def build_test_data(rebuild_html=False):
     """
     Scan data directories and return test data
+
+    :param rebuild_html: If True, rebuild the html files
     """
-    store = {'json': {}, 'html': {}}
+    store = {"json": {}, "html": {}}
     for data_type in store:
-        dir_path = os.path.abspath(f'tests/data/{data_type}/')
+        dir_path = os.path.abspath(f"tests/data/{data_type}/")
         for file in os.listdir(dir_path):
             file_path = os.path.join(dir_path, file)
             with open(file_path) as f:
                 data = f.read()
-                store[data_type][file.split(f'.{data_type}')[0]] = data
-    return store['json'], store['html']
+                store[data_type][file.split(f".{data_type}")[0]] = data
+
+            # Use this to (re)generate the html files
+            if rebuild_html and data_type == "json":
+                with open(file_path.replace("json", "html"), "w") as f:
+                    f.write(tiptapy.BaseDoc(config).render(data))
+
+    return store["json"], store["html"]
 
 
 json_data, html_data = build_test_data()

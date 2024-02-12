@@ -7,7 +7,7 @@
   {%- set doc_block = get_doc_block(ext, fname, size, src) -%}
   <figure class="file-attachment">
   {%- if caption -%}
-    {{doc_block}}<figcaption>{{escape(caption)}}</figcaption>
+    {{doc_block}}<figcaption>{{caption}}</figcaption>
   {%- else -%}
     {{doc_block}}
   {%- endif -%}

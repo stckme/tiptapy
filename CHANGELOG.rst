@@ -2,6 +2,12 @@
 History
 =======
 
+0.18.0 (2024-02-09)
+-------------------
+- html.escape all the attributes
+- Match link domain more precisely.
+- Image height or width can be individually specified
+
 0.16.0 (2023-03-14)
 -------------------
 * Support for new tiptap versions that uses camelCase over snake_case
