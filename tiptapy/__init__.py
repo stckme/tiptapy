@@ -50,7 +50,7 @@ class IFrameParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.is_reading_iframe = False
-        self.data = []
+        self.iframe = ""
 
     def handle_starttag(self, tag, attrs):
         if self.is_reading_iframe:
@@ -61,21 +61,18 @@ class IFrameParser(HTMLParser):
         _attrs = " ".join(
             [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
         )
-        self.data.append(f"<{tag} {_attrs}>")
+        self.iframe += f"<{tag} {_attrs}>"
         self.is_reading_iframe = True
 
     def handle_endtag(self, tag):
         if tag != self.allowed_tag:
             return
-        self.data.append(f"</{tag}>")
+        self.iframe += f"</{tag}>"
         self.is_reading_iframe = False
 
     def handle_data(self, data):
         if self.is_reading_iframe:
-            self.data.append(data)
-
-    def result(self) -> str:
-        return "".join(self.data)
+            self.iframe += data
 
 
 def escape_values_recursive(node):
@@ -86,7 +83,7 @@ def escape_values_recursive(node):
                 # Allow only iframe tag
                 p = IFrameParser()
                 p.feed(v)
-                node[k] = p.result()
+                node[k] = p.iframe
             else:
                 node[k] = escape_values_recursive(v)
     elif isinstance(node, list):
