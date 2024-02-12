@@ -49,28 +49,30 @@ class IFrameParser(HTMLParser):
 
     def __init__(self):
         super().__init__()
-        self.depth = 0
+        self.reading_iframe = False
         self.data = []
 
     def handle_starttag(self, tag, attrs):
+        if self.reading_iframe:
+            raise ValueError("Only one iframe tag is allowed")
+
         if tag != self.allowed_tag:
             return
         _attrs = " ".join(
             [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
         )
         self.data.append(f"<{tag} {_attrs}>")
-        self.depth += 1
+        self.reading_iframe = True
 
     def handle_endtag(self, tag):
         if tag != self.allowed_tag:
             return
         self.data.append(f"</{tag}>")
-        self.depth -= 1
+        self.reading_iframe = False
 
     def handle_data(self, data):
-        if self.depth <= 0:
-            return
-        self.data.append(data)
+        if self.reading_iframe:
+            self.data.append(data)
 
     def result(self) -> str:
         return "".join(self.data)
