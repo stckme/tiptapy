@@ -1,5 +1,4 @@
 import pkgutil
-from html import escape
 from string import Template
 from urllib.parse import urlparse
 
