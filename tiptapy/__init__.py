@@ -60,7 +60,7 @@ class IFrameParser(HTMLParser):
             return
 
         _attrs = " ".join(
-            [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
+            [escape(k) if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
         )
         self.iframe = f"<{tag} {_attrs}></{tag}>"
 
