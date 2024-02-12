@@ -61,12 +61,7 @@ class IFrameParser(HTMLParser):
         _attrs = " ".join(
             [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
         )
-        self.iframe = f"<{tag} {_attrs}>"
-
-    def handle_endtag(self, tag):
-        if tag != self.allowed_tag:
-            return
-        self.iframe += f"</{tag}>"
+        self.iframe = f"<{tag} {_attrs}></{tag}>"
 
 
 def escape_values_recursive(node):
