@@ -2,6 +2,7 @@ import json
 import os
 import sys
 from html import escape
+from html.parser import HTMLParser
 from typing import Dict
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -43,11 +44,51 @@ def _get_abs_template_path(path_str):
     return os.path.join(pkg_dir, path_str)
 
 
+class IFrameParser(HTMLParser):
+    allowed_tag = "iframe"
+
+    def __init__(self):
+        super().__init__()
+        self.is_reading = False
+        self.depth = 0
+        self.data = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag != self.allowed_tag:
+            return
+        _attrs = " ".join(
+            [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
+        )
+        self.data.append(f"<{tag} {_attrs}>")
+        self.depth += 1
+
+    def handle_endtag(self, tag):
+        if tag != self.allowed_tag:
+            return
+        self.data.append(f"</{tag}>")
+        self.depth -= 1
+        if self.depth == 0:
+            self.is_reading = False
+
+    def handle_data(self, data):
+        if not self.is_reading:
+            return
+        self.data.append(data)
+
+    def result(self) -> str:
+        return "".join(self.data)
+
+
 def escape_values_recursive(node):
-    skip_key = "html"  # Skip escaping html values in embeds
+    html_key = "html"  # key to look for html content
     if isinstance(node, dict):
         for k, v in node.items():
-            if k != skip_key:
+            if k == html_key:
+                # Allow only iframe tag
+                p = IFrameParser()
+                p.feed(v)
+                node[k] = p.result()
+            else:
                 node[k] = escape_values_recursive(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
