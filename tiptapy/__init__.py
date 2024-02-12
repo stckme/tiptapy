@@ -43,14 +43,15 @@ def _get_abs_template_path(path_str):
     return os.path.join(pkg_dir, path_str)
 
 
-def escape_recursive(node):
+def escape_values_recursive(node):
+    skip_key = "html"  # Skip escaping html values in embeds
     if isinstance(node, dict):
         for k, v in node.items():
-            if k != "html":
-                node[k] = escape_recursive(v)
+            if k != skip_key:
+                node[k] = escape_values_recursive(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
-            node[i] = escape_recursive(v)
+            node[i] = escape_values_recursive(v)
     elif isinstance(node, str):
         return escape(node)
     return node
@@ -75,5 +76,5 @@ class BaseDoc:
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
         node = in_data if isinstance(in_data, dict) else json.loads(in_data)
-        node = escape_recursive(node)
+        node = escape_values_recursive(node)
         return self.t.render(node=node)

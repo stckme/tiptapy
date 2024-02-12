@@ -54,9 +54,11 @@ class config:
     DOMAIN = "python.org"
 
 
-def build_test_data():
+def build_test_data(rebuild_html=False):
     """
     Scan data directories and return test data
+
+    :param rebuild_html: If True, rebuild the html files
     """
     store = {"json": {}, "html": {}}
     for data_type in store:
@@ -67,10 +69,10 @@ def build_test_data():
                 data = f.read()
                 store[data_type][file.split(f".{data_type}")[0]] = data
 
-            ## Use this to (re)generate the html files
-            # if data_type == "json":
-            #     with open(file_path.replace("json", "html"), "w") as f:
-            #         f.write(tiptapy.BaseDoc(config).render(data))
+            # Use this to (re)generate the html files
+            if rebuild_html and data_type == "json":
+                with open(file_path.replace("json", "html"), "w") as f:
+                    f.write(tiptapy.BaseDoc(config).render(data))
 
     return store["json"], store["html"]
 

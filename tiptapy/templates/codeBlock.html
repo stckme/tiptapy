@@ -1,6 +1,6 @@
 {%- set language = node.attrs.language|default("") -%}
 {%- if node.content -%}
-  {%- set text node.content[0].text -%}
+  {%- set text = node.content[0].text -%}
   {%- if text -%}
     <div><pre>
       {%- if language -%}
