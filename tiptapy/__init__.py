@@ -65,7 +65,7 @@ class IFrameParser(HTMLParser):
         self.iframe = f"<{tag} {_attrs}></{tag}>"
 
 
-def escape_values_recursive(node):
+def sanitize(node):
     html_key = "html"  # key to look for html content
     if isinstance(node, dict):
         for k, v in node.items():
@@ -78,10 +78,10 @@ def escape_values_recursive(node):
                 p.feed(v)
                 node[esc_k] = p.iframe
             else:
-                node[esc_k] = escape_values_recursive(v)
+                node[esc_k] = sanitize(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
-            node[i] = escape_values_recursive(v)
+            node[i] = sanitize(v)
     elif isinstance(node, str):
         return escape(node)
     return node
@@ -106,5 +106,5 @@ class BaseDoc:
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
         node = in_data if isinstance(in_data, dict) else json.loads(in_data)
-        node = escape_values_recursive(node)
+        node = sanitize(node)
         return self.t.render(node=node)
