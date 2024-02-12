@@ -50,7 +50,6 @@ class IFrameParser(HTMLParser):
     def __init__(self):
         super().__init__()
         self.iframe = ""
-        self.is_complete = False
 
     def handle_starttag(self, tag, attrs):
         if tag != self.allowed_tag:
@@ -68,11 +67,6 @@ class IFrameParser(HTMLParser):
         if tag != self.allowed_tag:
             return
         self.iframe += f"</{tag}>"
-        self.is_complete = True
-
-    def handle_data(self, data):
-        if self.iframe and not self.is_complete:
-            self.iframe += data
 
 
 def escape_values_recursive(node):
