@@ -56,7 +56,8 @@ class IFrameParser(HTMLParser):
             return
 
         if self.iframe:
-            raise ValueError("Only one iframe tag is allowed")
+            # Ignore more than one iframe
+            return
 
         _attrs = " ".join(
             [k if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
