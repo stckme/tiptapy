@@ -2,7 +2,6 @@ import json
 import os
 import sys
 from html import escape
-from html.parser import HTMLParser
 from typing import Dict
 
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -44,44 +43,22 @@ def _get_abs_template_path(path_str):
     return os.path.join(pkg_dir, path_str)
 
 
-class IFrameParser(HTMLParser):
-    allowed_tag = "iframe"
+def excape_values_recursive(node):
+    # Skip the html key in the node, as it is used to render the html
+    # and should not be escaped. Users should clean the html before
+    # passing it to the renderer.
+    skip_key = "html"
 
-    def __init__(self):
-        super().__init__()
-        self.iframe = ""
-
-    def handle_starttag(self, tag, attrs):
-        if tag != self.allowed_tag:
-            return
-
-        if self.iframe:
-            # Ignore more than one iframe
-            return
-
-        _attrs = " ".join(
-            [escape(k) if v is None else f'{escape(k)}="{escape(v)}"' for k, v in attrs]
-        )
-        self.iframe = f"<{tag} {_attrs}></{tag}>"
-
-
-def sanitize(node):
-    html_key = "html"  # key to look for html content
     if isinstance(node, dict):
         for k, v in node.items():
             esc_k = escape(k)
             if k != esc_k:
                 del node[k]
-            if esc_k == html_key:
-                # Allow only iframe tag
-                p = IFrameParser()
-                p.feed(v)
-                node[esc_k] = p.iframe
-            else:
-                node[esc_k] = sanitize(v)
+            if esc_k != skip_key:
+                node[esc_k] = excape_values_recursive(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
-            node[i] = sanitize(v)
+            node[i] = excape_values_recursive(v)
     elif isinstance(node, str):
         return escape(node)
     return node
@@ -106,5 +83,5 @@ class BaseDoc:
     def render(self, in_data):
         in_data = in_data if isinstance(in_data, dict) else json.loads(in_data)
         node = in_data if isinstance(in_data, dict) else json.loads(in_data)
-        node = sanitize(node)
+        node = excape_values_recursive(node)
         return self.t.render(node=node)
