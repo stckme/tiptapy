@@ -54,7 +54,9 @@ def escape_values_recursive(node):
             esc_k = escape(k)
             if k != esc_k:
                 del node[k]
-            if esc_k != skip_key:
+            if esc_k == skip_key:
+                node[esc_k] = v
+            else:
                 node[esc_k] = escape_values_recursive(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
