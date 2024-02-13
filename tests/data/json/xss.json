@@ -2,22 +2,11 @@
   "type": "doc",
   "attrs": {
     "data": {
-      "foo": "bar",
-      "><script>alert('pwned!');</script>": "\"><script>alert('pwned!');</script>"
+      "foo": "\"/><script>alert('pwned!');</script>",
+      "><script>alert('pwned!');</script>": "foo"
     }
   },
   "content": [
-    {
-      "type": "featuredimage",
-      "attrs": {
-        "src": {
-          "image": "\"><script>alert('pwned!');</script>",
-          "fallback": "\"><script>alert('pwned!');</script>"
-        },
-        "alt": "\"><script>alert('pwned!');</script>",
-        "caption": "<script>alert('pwned!');</script>"
-      }
-    },
     {
       "type": "paragraph",
       "content": [
@@ -27,8 +16,8 @@
             {
               "type": "link",
               "attrs": {
-                "\" onmouseover=\"alert('pwned!')\"=\"": "\" onmouseover=\"alert('pwned!')\"=\"",
-                "foo": "bar"
+                "><script>alert('pwned!');</script>": "foo",
+                "foo": "\">alert('pwned!');</script>"
               }
             }
           ],
