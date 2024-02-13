@@ -43,6 +43,7 @@ tags_to_test = (
     "document-sketch",
     "camel-case",
     "data_attributes",
+    "xss",
 )
 
 

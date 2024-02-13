@@ -50,7 +50,8 @@ def escape_values_recursive(node):
     skip_key = "html"
 
     if isinstance(node, dict):
-        for k, v in node.items():
+        items = list(node.items())
+        for k, v in items:
             esc_k = escape(k)
             if k != esc_k:
                 del node[k]

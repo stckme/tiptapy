@@ -1,0 +1,40 @@
+{
+  "type": "doc",
+  "attrs": {
+    "data": {
+      "foo": "bar",
+      "><script>alert('pwned!');</script>": "\"><script>alert('pwned!');</script>"
+    }
+  },
+  "content": [
+    {
+      "type": "featuredimage",
+      "attrs": {
+        "src": {
+          "image": "\"><script>alert('pwned!');</script>",
+          "fallback": "\"><script>alert('pwned!');</script>"
+        },
+        "alt": "\"><script>alert('pwned!');</script>",
+        "caption": "<script>alert('pwned!');</script>"
+      }
+    },
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "\" onmouseover=\"alert('pwned!')\"=\"": "\" onmouseover=\"alert('pwned!')\"=\"",
+                "foo": "bar"
+              }
+            }
+          ],
+          "text": "<script>alert('pwned!');</script>"
+        }
+      ]
+    }
+  ]
+}
