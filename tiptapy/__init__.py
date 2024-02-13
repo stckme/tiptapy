@@ -44,11 +44,21 @@ def _get_abs_template_path(path_str):
 
 
 def escape_values_recursive(node):
-    skip_key = "html"  # Skip escaping html values in embeds
+    # Skip the html key in the node, as it is used to render the html
+    # and should not be escaped. Users should clean the html before
+    # passing it to the renderer.
+    skip_key = "html"
+
     if isinstance(node, dict):
-        for k, v in node.items():
-            if k != skip_key:
-                node[k] = escape_values_recursive(v)
+        items = list(node.items())
+        for k, v in items:
+            esc_k = escape(k)
+            if k != esc_k:
+                del node[k]
+            if esc_k == skip_key:
+                node[esc_k] = v
+            else:
+                node[esc_k] = escape_values_recursive(v)
     elif isinstance(node, list):
         for i, v in enumerate(node):
             node[i] = escape_values_recursive(v)

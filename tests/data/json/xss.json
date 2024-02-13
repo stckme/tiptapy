@@ -1,0 +1,29 @@
+{
+  "type": "doc",
+  "attrs": {
+    "data": {
+      "foo": "\"/><script>alert('pwned!');</script>",
+      "><script>alert('pwned!');</script>": "foo"
+    }
+  },
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "marks": [
+            {
+              "type": "link",
+              "attrs": {
+                "><script>alert('pwned!');</script>": "foo",
+                "foo": "\">alert('pwned!');</script>"
+              }
+            }
+          ],
+          "text": "<script>alert('pwned!');</script>"
+        }
+      ]
+    }
+  ]
+}
