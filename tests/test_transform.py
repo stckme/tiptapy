@@ -1,4 +1,5 @@
 import os
+from copy import deepcopy
 
 import pytest
 
@@ -87,7 +88,11 @@ def test_html_tag(tag):
     Test expected json input with the expected html.
     """
     tag_data = json_data[tag]
-    expected_html = html_data[tag]
+    tag_data_copy = deepcopy(tag_data)
+    expected_html = html_data[tag].strip()
 
     renderer = tiptapy.BaseDoc(config)
-    assert renderer.render(tag_data) == expected_html.strip()
+    rendered_html = renderer.render(tag_data).strip()
+
+    assert rendered_html == expected_html
+    assert tag_data == tag_data_copy  # Test pass by value

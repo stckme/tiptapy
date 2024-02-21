@@ -14,7 +14,7 @@ from .macros import (
     make_img_src,
 )
 
-__version__ = "0.18.0"
+__version__ = "0.18.1"
 
 renderers: Dict = {}
 
@@ -50,18 +50,12 @@ def escape_values_recursive(node):
     skip_key = "html"
 
     if isinstance(node, dict):
-        items = list(node.items())
-        for k, v in items:
-            esc_k = escape(k)
-            if k != esc_k:
-                del node[k]
-            if esc_k == skip_key:
-                node[esc_k] = v
-            else:
-                node[esc_k] = escape_values_recursive(v)
+        return {
+            escape(k): v if k == skip_key else escape_values_recursive(v)
+            for k, v in node.items()
+        }
     elif isinstance(node, list):
-        for i, v in enumerate(node):
-            node[i] = escape_values_recursive(v)
+        return [escape_values_recursive(x) for x in node]
     elif isinstance(node, str):
         return escape(node)
     return node

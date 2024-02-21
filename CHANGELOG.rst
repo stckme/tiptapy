@@ -2,6 +2,10 @@
 History
 =======
 
+0.18.1 (2024-02-21)
+-------------------
+- Fixed blocks data getting updated due to pass by reference
+
 0.18.0 (2024-02-09)
 -------------------
 - html.escape all the attributes
