@@ -50,11 +50,10 @@ def escape_values_recursive(node):
     skip_key = "html"
 
     if isinstance(node, dict):
-        new = {
+        return {
             escape(k): v if k == skip_key else escape_values_recursive(v)
             for k, v in node.items()
         }
-        return new
     elif isinstance(node, list):
         return [escape_values_recursive(x) for x in node]
     elif isinstance(node, str):
