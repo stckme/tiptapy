@@ -57,7 +57,6 @@ def escape_values_recursive(node):
         return new
     elif isinstance(node, list):
         return [escape_values_recursive(x) for x in node]
-        return new
     elif isinstance(node, str):
         return escape(node)
     return node
