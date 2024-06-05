@@ -3,6 +3,13 @@ from string import Template
 from urllib.parse import urlparse
 
 
+def render_block_id(node):
+    uid = node.get("attrs", {}).get("uid", "").strip()
+    if not uid:        
+        return ''
+    
+    return f' id="{uid}"'
+
 def make_img_src(attrs):
     alt = attrs.get("alt", "").strip()
     height = attrs.get("height", "")
