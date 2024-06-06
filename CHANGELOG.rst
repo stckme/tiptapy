@@ -2,7 +2,7 @@
 History
 =======
 
-0.18.2 (2024-06-06)
+0.19.0 (2024-06-06)
 -------------------
 - Render attrs for parent tag in block if present, only rendering `id` for now.
 
