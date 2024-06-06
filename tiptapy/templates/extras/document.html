@@ -5,7 +5,7 @@
 {%- set ext = node.attrs.format|trim -%}
 {%- if src and size and fname and ext -%}
   {%- set doc_block = get_doc_block(ext, fname, size, src) -%}
-  <figure class="file-attachment"{{ extract_parent_tag_attrs(node) }}>
+  <figure class="file-attachment"{{ extract_tag_attrs(node) }}>
   {%- if caption -%}
     {{doc_block}}<figcaption>{{caption}}</figcaption>
   {%- else -%}

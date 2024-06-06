@@ -1,4 +1,4 @@
-<h{{node.attrs.level|default(1)}}{{ extract_parent_tag_attrs(node) }}>
+<h{{node.attrs.level|default(1)}}{{ extract_tag_attrs(node) }}>
 {%- for item in node.content -%}
   {%- with template=item.type + '.html', node=item -%} 
       {%- include template -%}
