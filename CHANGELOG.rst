@@ -2,6 +2,10 @@
 History
 =======
 
+0.18.2 (2024-06-06)
+-------------------
+- Render attrs for parent tag in block if present, only rendering `id` for now.
+
 0.18.1 (2024-02-21)
 -------------------
 - Fixed blocks data getting updated due to pass by reference
