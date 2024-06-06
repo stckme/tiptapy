@@ -4,6 +4,7 @@
     {
       "type": "image",
       "attrs": {
+        "id": "b-NzgT2MAhuSTnpFyo-E9",
         "src": {
           "image": "https://placekitten.com/200/301?text=\"escape me\"",
           "fallback": "https://placekitten.com/198/654"

@@ -1,7 +1,7 @@
 {%- set html = node.attrs.html -%}
 
 {%- set provider_name = node.attrs.provider|default('link')|lower -%}
-<div class="embed-wrapper {{provider_name}}-wrapper">
+<div class="embed-wrapper {{provider_name}}-wrapper"{{ extract_parent_tag_attrs(node) }}>
 {%- for item in node.content -%}
   {%- with template=item.type + '.html', node=item -%}
       {%- include template -%}
