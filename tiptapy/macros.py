@@ -3,12 +3,17 @@ from string import Template
 from urllib.parse import urlparse
 
 
-def render_block_id(node):
-    uid = node.get("attrs", {}).get("uid", "").strip()
-    if not uid:        
-        return ''
-    
-    return f' id="{uid}"'
+def extract_parent_tag_attrs(node):
+    allowed_attributes = ("id",)
+    attrs = node.get("attrs")
+    return (
+        "".join(
+            f' {attr}="{attrs[attr]}"' for attr in allowed_attributes if attr in attrs
+        )
+        if attrs
+        else ""
+    )
+
 
 def make_img_src(attrs):
     alt = attrs.get("alt", "").strip()

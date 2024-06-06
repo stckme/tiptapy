@@ -12,7 +12,7 @@ from .macros import (
     get_audio_player_block,
     get_doc_block,
     make_img_src,
-    render_block_id,
+    extract_parent_tag_attrs,
 )
 
 __version__ = "0.18.1"
@@ -27,7 +27,7 @@ def init_env(path, config):
     )
     # https://stackoverflow.com/a/6038550
     env.globals["url2mime"] = url2mime
-    env.globals["render_block_id"] = render_block_id
+    env.globals["extract_parent_tag_attrs"] = extract_parent_tag_attrs
     env.globals["make_img_src"] = make_img_src
     env.globals["handle_links"] = build_link_handler(config)
     env.globals["get_audio_player_block"] = get_audio_player_block
