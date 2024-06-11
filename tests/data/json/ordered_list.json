@@ -13,7 +13,8 @@
     {
       "type": "ordered_list",
       "attrs": {
-        "order": 1
+        "order": 1,
+        "id": "b-NzgT2MAhuSTnpFyo-E3"
       },
       "content": [
         {
@@ -63,7 +64,8 @@
     {
       "type": "ordered_list",
       "attrs": {
-        "start": 2
+        "start": 2,
+        "id": "b-NzgT2MAhuSTnpFyo-E3"
       },
       "content": [
         {
@@ -71,6 +73,9 @@
           "content": [
             {
               "type": "paragraph",
+              "attrs": {
+                "id": "b-NzgT2MAhuSTnpFyo-E3"
+              },
               "content": [
                 {
                   "type": "text",

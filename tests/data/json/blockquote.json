@@ -3,6 +3,9 @@
     "content": [
       {
         "type": "blockquote",
+        "attrs": {
+          "id": "b-NzgT2MAhuSTnpFyo-E3"
+        },
         "content": [
           {
             "type": "paragraph",
