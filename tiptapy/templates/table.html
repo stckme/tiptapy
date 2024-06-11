@@ -1,0 +1,29 @@
+<table>
+    {%- for item in node.content -%}
+        <tr>
+            {%- for cell in item.content -%}
+                {%- if cell.type == 'tableHeader' -%}
+                    <th colspan="{{ cell.attrs.colspan }}" rowspan="{{ cell.attrs.rowspan }}">
+                        {%- for para in cell.content -%}
+                            {%- for text in para.content -%}
+                                {%- with template=text.type + '.html', node=text -%}
+                                    {%- include template -%}
+                                {%- endwith -%}
+                            {%- endfor -%}
+                        {%- endfor -%}
+                    </th>
+                {%- elif cell.type == 'tableCell' -%}
+                    <td colspan="{{ cell.attrs.colspan }}" rowspan="{{ cell.attrs.rowspan }}">
+                        {%- for para in cell.content -%}
+                            {%- for text in para.content -%}
+                                {%- with template=text.type + '.html', node=text -%}
+                                    {%- include template -%}
+                                {%- endwith -%}
+                            {%- endfor -%}
+                        {%- endfor -%}
+                    </td>
+                {%- endif -%}
+            {%- endfor -%}
+        </tr>
+    {%- endfor -%}
+</table>
