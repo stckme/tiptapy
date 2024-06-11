@@ -19,7 +19,7 @@ __version__ = "0.18.1"
 renderers: Dict = {}
 
 
-def init_env(path, config):
+def init_env(path, config, ai_tag):
     env = Environment(
         loader=FileSystemLoader(path),
         autoescape=select_autoescape(enabled_extensions=("html")),
@@ -30,6 +30,7 @@ def init_env(path, config):
     env.globals["handle_links"] = build_link_handler(config)
     env.globals["get_audio_player_block"] = get_audio_player_block
     env.globals["get_doc_block"] = get_doc_block
+    env.globals["tag_name"] = ai_tag
 
     return env
 
@@ -72,8 +73,8 @@ class BaseDoc:
     # Useful in case where code is referring same template for both protected
     # and guest views
 
-    def __init__(self, config):
-        environ = init_env(self.templates_path, config)
+    def __init__(self, config, focus_tag):
+        environ = init_env(self.templates_path, config, focus_tag)
         self.t = environ.get_template(f"{self.doc_type}.html")
         self.t.environment.globals["locked"] = self.locked
 
