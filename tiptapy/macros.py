@@ -3,6 +3,7 @@ from string import Template
 from urllib.parse import urlparse
 
 
+# added only for parent nodes
 def extract_tag_attrs(node):
     allowed_attributes = ("id",)
     attrs = node.get("attrs")

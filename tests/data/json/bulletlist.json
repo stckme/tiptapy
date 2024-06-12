@@ -3,6 +3,9 @@
     "content": [
       {
         "type": "bullet_list",
+        "attrs": {
+          "id": "b-NzgT2MAhuSTnpFyo-E3"
+        },
         "content": [
           {
             "type": "list_item",

@@ -10,7 +10,7 @@
   {%- set width = node.attrs.width -%}
 
   {%- if image_url or fallback_url -%}
-    <figure class="featured-image"><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
+    <figure class="featured-image"{{ extract_tag_attrs(node) }}><picture><source srcset="{{ image_url }}" type="{{ image_type }}"/><source srcset="{{ fallback_url }}" type="{{ fallback_type }}"/><{{ make_img_src(node.attrs) }}/></picture>
     {%- if caption -%}
       <figcaption>{{ caption }}</figcaption>
     {%- endif -%}
