@@ -2,7 +2,7 @@
 {%- if node.content -%}
   {%- set text = node.content[0].text -%}
   {%- if text -%}
-    <div{{ extract_tag_attrs(node) }}><pre>
+    <div class="code-block-wrapper" {{ extract_tag_attrs(node) }}><pre>
       {%- if language -%}
         <code data-lang="{{language}}">{{text}}</code>
       {%- else -%}
