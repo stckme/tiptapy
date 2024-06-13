@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="tiptapy",
-    version="0.18.1",  # TODO: why bumpversion works only for single quotes?
+    version="0.19.0",
     url="https://github.com/scrolltech/tiptapy",
     description="Library that generates HTML output from JSON export of tiptap editor",
     long_description=open("README.md").read(),

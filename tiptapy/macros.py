@@ -3,6 +3,19 @@ from string import Template
 from urllib.parse import urlparse
 
 
+# added only for parent nodes
+def extract_tag_attrs(node):
+    allowed_attributes = ("id",)
+    attrs = node.get("attrs")
+    return (
+        "".join(
+            f' {attr}="{attrs[attr]}"' for attr in allowed_attributes if attr in attrs
+        )
+        if attrs
+        else ""
+    )
+
+
 def make_img_src(attrs):
     alt = attrs.get("alt", "").strip()
     height = attrs.get("height", "")

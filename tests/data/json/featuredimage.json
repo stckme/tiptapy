@@ -4,6 +4,7 @@
     {
       "type": "featuredimage",
       "attrs": {
+        "id": "b-NzgT2MAhuSTnpFyo-E8",
         "src": {
           "image": "https://placekitten.com/200/301",
           "fallback": "https://placekitten.com/198/654"

@@ -1,7 +1,7 @@
 {%- if node.attrs.start -%}
-<ol start="{{ node.attrs.start }}">
+<ol start="{{ node.attrs.start }}"{{ extract_tag_attrs(node) }}>
 {%- else -%}
-<ol start="{{ node.attrs.order|default(1) }}">
+<ol start="{{ node.attrs.order|default(1) }}"{{ extract_tag_attrs(node) }}>
 {%- endif -%}
 {%- for item in node.content -%}
   {%- with template=item.type + '.html', node=item -%} 
