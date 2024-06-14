@@ -19,6 +19,15 @@
           },
           {
             "type": "text",
+            "marks": [
+              {
+                "type": "underline"
+              }
+            ],
+            "text": "underline text"
+          },
+          {
+            "type": "text",
             "text": ", this is "
           },
           {
