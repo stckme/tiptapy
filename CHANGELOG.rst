@@ -2,6 +2,10 @@
 History
 =======
 
+0.20.0 (2024-06-14)
+-------------------
+- Underline mark added.
+
 0.19.0 (2024-06-06)
 -------------------
 - Render attrs for parent tag in block if present, only rendering `id` for now.
