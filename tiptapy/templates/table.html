@@ -1,0 +1,23 @@
+<table class="standard-table">
+  {%- for row in node.content -%}
+  <tr>
+    {%- for cell in row.content -%} {%- if cell.type == 'tableHeader' -%}
+    <th {% if cell.attrs.colspan and cell.attrs.colspan>
+      1 %}colspan="{{cell.attrs.colspan}}"{% endif %}> {%- for content in cell.content -%} {%- if content.type == 'text'
+      -%} {% set ns = namespace(text=content.text) %} {%- for mark in content.marks if content.marks -%} {%- set ns.text
+      -%} {%- with template='marks/' + mark.type + '.html', text=ns.text, mark=mark -%} {%- include template -%} {%-
+      endwith -%} {%- endset -%} {%- endfor -%} {{ns.text}} {%- else -%} {%- with template=content.type + '.html',
+      node=content -%} {%- include template -%} {%- endwith -%} {%- endif -%} {%- endfor -%}
+    </th>
+    {%- else -%}
+    <td {% if cell.attrs.colspan and cell.attrs.colspan>
+      1 %}colspan="{{cell.attrs.colspan}}"{% endif %}> {%- for content in cell.content -%} {%- if content.type == 'text'
+      -%} {% set ns = namespace(text=content.text) %} {%- for mark in content.marks if content.marks -%} {%- set ns.text
+      -%} {%- with template='marks/' + mark.type + '.html', text=ns.text, mark=mark -%} {%- include template -%} {%-
+      endwith -%} {%- endset -%} {%- endfor -%} {{ns.text}} {%- else -%} {%- with template=content.type + '.html',
+      node=content -%} {%- include template -%} {%- endwith -%} {%- endif -%} {%- endfor -%}
+    </td>
+    {%- endif -%} {%- endfor -%}
+  </tr>
+  {%- endfor -%}
+</table>

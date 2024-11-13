@@ -1,0 +1,5 @@
+{# This should be in templates/dynamic-text-content.html #} {% set ns = namespace(content=node.attrs.content) %} {%- for
+mark in node.marks if node.marks -%} {%- set ns.content -%} {%- with template='marks/' + mark.type + '.html',
+text=ns.content, mark=mark -%} {%- include template -%} {%- endwith -%} {%- endset -%} {%- endfor -%}
+
+<span class="dynamic-text" data-path="{{ node.attrs.path|join('/') }}">{{ns.content}}</span>

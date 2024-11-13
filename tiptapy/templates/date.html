@@ -1,0 +1,5 @@
+{# templates/date.html #} {% set ns = namespace(date=node.attrs.content) %} {%- for mark in node.marks if node.marks -%}
+{%- set ns.date -%} {%- with template='marks/' + mark.type + '.html', text=ns.date, mark=mark -%} {%- include template
+-%} {%- endwith -%} {%- endset -%} {%- endfor -%}
+
+<span class="date-node"> {{- ns.date if ns.date else '' -}} </span>

@@ -1,0 +1,24 @@
+<table class="dynamic-table">
+  {%- if node.attrs.content.headers -%}
+  <thead>
+    <tr>
+      {%- for header in node.attrs.content.headers -%} {% set ns = namespace(text=header) %} {%- for mark in node.marks
+      if node.marks -%} {%- set ns.text -%} {%- with template='marks/' + mark.type + '.html', text=ns.text, mark=mark
+      -%} {%- include template -%} {%- endwith -%} {%- endset -%} {%- endfor -%}
+      <th>{{ns.text}}</th>
+      {%- endfor -%}
+    </tr>
+  </thead>
+  {%- endif -%}
+  <tbody>
+    {%- for row in node.attrs.content.rows -%}
+    <tr>
+      {%- for cell in row -%} {% set ns = namespace(text=cell) %} {%- for mark in node.marks if node.marks -%} {%- set
+      ns.text -%} {%- with template='marks/' + mark.type + '.html', text=ns.text, mark=mark -%} {%- include template -%}
+      {%- endwith -%} {%- endset -%} {%- endfor -%}
+      <td>{{ns.text}}</td>
+      {%- endfor -%}
+    </tr>
+    {%- endfor -%}
+  </tbody>
+</table>
