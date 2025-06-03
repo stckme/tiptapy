@@ -20,7 +20,11 @@ def make_img_src(attrs):
     alt = attrs.get("alt", "").strip()
     height = attrs.get("height", "")
     width = attrs.get("width", "")
-    fallback_url = attrs["src"]["fallback"].strip()
+    if isinstance(attrs["src"], dict):
+        fallback_url = attrs["src"]["fallback"].strip()
+    else:
+        fallback_url = attrs["src"].strip()
+
     img = f'img src="{fallback_url}"'
     if alt:
         img += f' alt="{alt}"'
