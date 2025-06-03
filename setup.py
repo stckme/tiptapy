@@ -2,7 +2,7 @@ from setuptools import find_packages, setup
 
 setup(
     name="tiptapy",
-    version="0.20.0",
+    version="0.21.0",
     url="https://github.com/scrolltech/tiptapy",
     description="Library that generates HTML output from JSON export of tiptap editor",
     long_description=open("README.md").read(),
