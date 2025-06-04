@@ -15,7 +15,7 @@ from .macros import (
     extract_tag_attrs,
 )
 
-__version__ = "0.20.0"
+__version__ = "0.21.0"
 
 renderers: Dict = {}
 

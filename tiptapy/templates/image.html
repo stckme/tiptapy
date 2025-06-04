@@ -3,9 +3,9 @@
   {%- set alt = node.attrs.alt|trim -%}
   {%- set height = node.attrs.height -%}
   {%- set width = node.attrs.width -%}
-  {%- set image_url = node.attrs.src.image|trim -%}
+  {%- set image_url = (node.attrs.src.image if node.attrs.src is mapping else node.attrs.src)|trim -%}
   {%- set image_type = url2mime(image_url) -%}
-  {%- set fallback_url = node.attrs.src.fallback|trim -%}
+  {%- set fallback_url = (node.attrs.src.fallback if node.attrs.src is mapping else node.attrs.src)|trim -%}
   {%- set fallback_type = url2mime(fallback_url) -%}
 
   {%- if image_url or fallback_url -%}

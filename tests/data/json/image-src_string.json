@@ -1,0 +1,15 @@
+{
+  "type": "doc",
+  "content": [
+    {
+      "type": "image",
+      "attrs": {
+        "src": "https://placekitten.com/200/301",
+        "alt": "Sleepy Kitten",
+        "caption": "Cute Kitty",
+        "height": 400,
+        "width": 300
+      }
+    }
+  ]
+}
